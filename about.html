@@ -1,0 +1,980 @@
+<!-- STC Prototype v1 — about.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Solution Track Consulting</title>
+  <meta name="description" content="Stephen Frahm — veteran, world traveler, and 25-year Cisco UC engineer behind Solution Track Consulting. Senior-level forensic engineering for enterprise IT." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0a1f44;
+      --navy-mid:    #112958;
+      --navy-light:  #1e3a6e;
+      --blue:        #1a6bcc;
+      --blue-hover:  #145db3;
+      --orange:      #e86a2e;
+      --orange-hover:#d05a20;
+      --bg-alt:      #f0f4fa;
+      --bg-white:    #ffffff;
+      --text-dark:   #0d1b2e;
+      --text-mid:    #3a4a60;
+      --text-light:  #6b7a96;
+      --border:      #d8e2f0;
+      --radius:      6px;
+      --radius-lg:   12px;
+      --shadow-sm:   0 2px 8px rgba(10,31,68,.08);
+      --shadow-md:   0 6px 24px rgba(10,31,68,.13);
+      --shadow-lg:   0 16px 48px rgba(10,31,68,.18);
+      --font:        'Inter', system-ui, -apple-system, sans-serif;
+      --max-w:       1140px;
+      --section-pad: 96px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; }
+
+    .section-title {
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      max-width: 640px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header .section-subtitle { margin: 0 auto; }
+
+    /* ─── Buttons ───────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      box-shadow: 0 3px 12px rgba(26,107,204,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 6px 20px rgba(232,106,46,.40);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border-color: rgba(255,255,255,.4);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.7);
+    }
+
+    /* ─── Dots accent ───────────────────────────────────────────────────── */
+    .dots-accent {
+      position: absolute;
+      width: 160px; height: 160px;
+      background-image: radial-gradient(circle, var(--blue) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+      opacity: .13;
+      pointer-events: none;
+    }
+
+    /* ─── Section divider ───────────────────────────────────────────────── */
+    .section-divider {
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--blue) 30%, var(--orange) 70%, transparent);
+      opacity: .2;
+    }
+
+    /* ════════════════════════════════════════════════════════════════════
+       NAV
+    ════════════════════════════════════════════════════════════════════ */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,31,68,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      transition: box-shadow .3s;
+    }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.82);
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
+    .nav-links a.active {
+      color: #fff;
+      background: rgba(255,255,255,.1);
+      position: relative;
+    }
+    .nav-links a.active::after {
+      content: '';
+      position: absolute;
+      bottom: -1px; left: 14px; right: 14px;
+      height: 2px;
+      background: var(--orange);
+      border-radius: 2px;
+    }
+    .nav-cta { margin-left: 8px; }
+    .nav-cta .btn { padding: 9px 20px; font-size: .87rem; }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background: rgba(10,31,68,.99);
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      z-index: 999;
+      padding: 16px 24px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      padding: 14px 0;
+      color: rgba(255,255,255,.82);
+      font-size: 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: color .15s;
+    }
+    .nav-mobile a:last-of-type { border-bottom: none; }
+    .nav-mobile a:hover { color: #fff; }
+    .nav-mobile a.active { color: #fff; }
+    .nav-mobile .btn { margin-top: 16px; justify-content: center; width: 100%; }
+
+    /* ════════════════════════════════════════════════════════════════════
+       BREADCRUMB
+    ════════════════════════════════════════════════════════════════════ */
+    .breadcrumb-bar {
+      background: var(--navy);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      padding: 12px 0;
+      margin-top: 68px;
+    }
+    .breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .82rem;
+      color: rgba(255,255,255,.45);
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+    .breadcrumb a { color: rgba(255,255,255,.55); transition: color .15s; }
+    .breadcrumb a:hover { color: rgba(255,255,255,.9); }
+    .breadcrumb-sep { font-size: .7rem; opacity: .4; }
+    .breadcrumb-current { color: rgba(255,255,255,.8); font-weight: 500; }
+
+    /* ════════════════════════════════════════════════════════════════════
+       PAGE HERO
+    ════════════════════════════════════════════════════════════════════ */
+    .page-hero {
+      background: linear-gradient(135deg, #0a1f44 0%, #112958 60%, #0d2d5a 100%);
+      padding: 72px 24px 64px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 80% at 70% 50%, rgba(26,107,204,.15) 0%, transparent 70%),
+        radial-gradient(ellipse 40% 60% at 20% 60%, rgba(232,106,46,.06) 0%, transparent 60%);
+      pointer-events: none;
+    }
+    .page-hero-dots {
+      position: absolute;
+      width: 160px; height: 160px;
+      background-image: radial-gradient(circle, rgba(255,255,255,.15) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .page-hero-dots-1 { top: 20px; right: 80px; }
+    .page-hero-dots-2 { bottom: 20px; left: 60px; }
+
+    .page-hero-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .page-hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26,107,204,.2);
+      border: 1px solid rgba(26,107,204,.35);
+      border-radius: 40px;
+      padding: 5px 16px 5px 10px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 22px;
+    }
+    .page-hero-dot {
+      width: 7px; height: 7px;
+      background: var(--orange);
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .page-hero h1 {
+      font-size: clamp(2rem, 4vw, 2.9rem);
+      font-weight: 800;
+      color: #fff;
+      margin-bottom: 14px;
+    }
+    .page-hero-sub {
+      font-size: 1.1rem;
+      color: rgba(255,255,255,.7);
+      line-height: 1.7;
+      max-width: 580px;
+      margin: 0 auto 36px;
+    }
+
+    /* Hero stat pills */
+    .hero-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: var(--blue);
+      color: #fff;
+      border-radius: var(--radius);
+      padding: 10px 18px;
+      font-size: .85rem;
+      font-weight: 600;
+      box-shadow: 0 3px 12px rgba(26,107,204,.35);
+    }
+    .hero-pill-emoji { font-size: 1rem; line-height: 1; }
+
+    /* ════════════════════════════════════════════════════════════════════
+       SECTION 2 — FOUNDER STORY
+    ════════════════════════════════════════════════════════════════════ */
+    .founder-section {
+      background: var(--bg-white);
+      padding: var(--section-pad);
+      position: relative;
+      overflow: hidden;
+    }
+    .founder-section .dots-accent { bottom: 40px; right: 60px; }
+
+    .founder-inner {
+      max-width: var(--max-w);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 400px;
+      gap: 72px;
+      align-items: start;
+    }
+
+    .founder-text h2 {
+      font-size: clamp(1.4rem, 2.5vw, 1.85rem);
+      color: var(--navy);
+      margin-bottom: 24px;
+      line-height: 1.25;
+    }
+    .founder-text p {
+      font-size: .97rem;
+      color: var(--text-mid);
+      line-height: 1.78;
+      margin-bottom: 18px;
+    }
+    .founder-text p:last-child { margin-bottom: 0; }
+
+    /* Credential card */
+    .credential-card {
+      background: var(--navy);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius-lg);
+      padding: 36px 32px;
+      color: #fff;
+      position: relative;
+      overflow: hidden;
+    }
+    .credential-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--orange));
+    }
+
+    .credential-section {
+      margin-bottom: 28px;
+    }
+    .credential-section:last-child { margin-bottom: 0; }
+
+    .credential-label {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.4);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .credential-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,.08);
+    }
+
+    .credential-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .credential-list li {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .9rem;
+      color: rgba(255,255,255,.82);
+      line-height: 1.4;
+    }
+    .credential-list li::before {
+      content: '';
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    .credential-badges {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .credential-badge {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--radius);
+      padding: 10px 14px;
+      font-size: .87rem;
+      font-weight: 600;
+      color: rgba(255,255,255,.88);
+    }
+    .credential-badge-check {
+      width: 20px; height: 20px;
+      background: rgba(26,107,204,.3);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: .7rem;
+      color: #7db8f7;
+      flex-shrink: 0;
+    }
+
+    /* ════════════════════════════════════════════════════════════════════
+       SECTION 3 — WHY STC
+    ════════════════════════════════════════════════════════════════════ */
+    .why-section {
+      background: var(--bg-alt);
+      padding: var(--section-pad);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .why-cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .why-card {
+      background: var(--bg-white);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      transition: box-shadow .25s, transform .2s, border-color .2s;
+    }
+    .why-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      border-color: rgba(26,107,204,.2);
+    }
+    .why-card-emoji {
+      font-size: 2.2rem;
+      display: block;
+      margin-bottom: 16px;
+      line-height: 1;
+    }
+    .why-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+    .why-card p {
+      font-size: .9rem;
+      color: var(--text-mid);
+      line-height: 1.68;
+    }
+
+    /* ════════════════════════════════════════════════════════════════════
+       CTA BAND
+    ════════════════════════════════════════════════════════════════════ */
+    .cta-band {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0d2d5a 100%);
+      padding: 88px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-band::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(26,107,204,.12) 0%, transparent 70%);
+    }
+    .cta-band-dots {
+      position: absolute;
+      width: 160px; height: 160px;
+      background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px);
+      background-size: 18px 18px;
+      pointer-events: none;
+    }
+    .cta-band-dots-1 { top: 24px; right: 100px; }
+    .cta-band-dots-2 { bottom: 24px; left: 80px; }
+    .cta-band h2 {
+      color: #fff;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      margin-bottom: 14px;
+      position: relative;
+    }
+    .cta-band p {
+      color: rgba(255,255,255,.72);
+      font-size: 1.05rem;
+      margin-bottom: 36px;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+      line-height: 1.7;
+    }
+    .cta-band .btn { font-size: 1rem; padding: 16px 40px; position: relative; }
+
+    /* ════════════════════════════════════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════════════════════════════════════ */
+    .site-footer {
+      background: #060f20;
+      padding: 64px 24px 32px;
+      color: rgba(255,255,255,.55);
+    }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+    .footer-brand img {
+      height: 36px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .85;
+      margin-bottom: 16px;
+    }
+    .footer-brand p { font-size: .88rem; line-height: 1.65; margin-bottom: 20px; }
+    .footer-badge img { height: 52px; width: auto; opacity: .55; filter: brightness(0) invert(1); }
+    .footer-col h4 {
+      font-size: .78rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .88rem; color: rgba(255,255,255,.5); transition: color .15s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,.9); }
+    .footer-contact p { display: flex; align-items: center; gap: 10px; font-size: .88rem; margin-bottom: 10px; }
+    .footer-contact svg { width: 15px; height: 15px; flex-shrink: 0; color: rgba(255,255,255,.3); }
+    .footer-contact a { transition: color .15s; }
+    .footer-contact a:hover { color: rgba(255,255,255,.9); }
+    .footer-bottom {
+      padding-top: 28px; display: flex; align-items: center;
+      justify-content: space-between; flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: .8rem; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: .8rem; color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.7); }
+
+    /* ════════════════════════════════════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════════════════════════════════════ */
+    @media (max-width: 900px) {
+      .founder-inner { grid-template-columns: 1fr; gap: 48px; }
+      .why-cards     { grid-template-columns: 1fr; }
+      .footer-top    { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      :root { --section-pad: 72px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .page-hero  { padding: 48px 20px 52px; }
+      .page-hero h1 { font-size: 1.85rem; }
+      .hero-pills { gap: 8px; }
+      .hero-pill  { font-size: .8rem; padding: 9px 14px; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+    @media (max-width: 480px) {
+      .page-hero h1 { font-size: 1.6rem; }
+      .hero-pills   { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════════════════════ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Solution Track Consulting home">
+      <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html" class="active">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+         class="btn btn-primary" target="_blank" rel="noopener">
+        Discuss Your Project
+      </a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile" id="navMobile" role="dialog" aria-label="Mobile menu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html" class="active">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+     class="btn btn-primary" target="_blank" rel="noopener">
+    Discuss Your Project
+  </a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     BREADCRUMB
+════════════════════════════════════════════════════════════════ -->
+<div class="breadcrumb-bar">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">About</span>
+  </nav>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     PAGE HERO
+════════════════════════════════════════════════════════════════ -->
+<section class="page-hero" id="top">
+  <div class="page-hero-dots page-hero-dots-1"></div>
+  <div class="page-hero-dots page-hero-dots-2"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">
+      <span class="page-hero-dot"></span>
+      Solution Track Consulting
+    </div>
+    <h1>Global Perspective.<br />Disciplined Engineering.</h1>
+    <p class="page-hero-sub">
+      Based in the Pacific Northwest, Solution Track Consulting brings enterprise-grade
+      clarity to the most complex communication environments.
+    </p>
+    <div class="hero-pills">
+      <div class="hero-pill"><span class="hero-pill-emoji">🇺🇸</span> Veteran-Owned</div>
+      <div class="hero-pill"><span class="hero-pill-emoji">📍</span> Pacific Northwest</div>
+      <div class="hero-pill"><span class="hero-pill-emoji">✈️</span> Global Perspective</div>
+      <div class="hero-pill"><span class="hero-pill-emoji">🎓</span> 25+ Years Cisco UC</div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 2 — FOUNDER STORY
+════════════════════════════════════════════════════════════════ -->
+<section class="founder-section" id="story">
+  <div class="dots-accent" style="bottom:40px;right:60px;"></div>
+  <div class="container">
+    <span class="eyebrow">The Story Behind Solution Track</span>
+    <div class="founder-inner">
+
+      <div class="founder-text">
+        <h2>I'm Stephen Frahm, founder of<br />Solution Track Consulting.</h2>
+        <p>
+          My approach to IT is shaped by two decades of high-stakes engineering and a background
+          defined by service and exploration. As a veteran, I built my professional foundation on
+          discipline and a mission-first mindset. In enterprise communications, where a down system
+          or a compliance gap can have real-world consequences, that discipline is what keeps clients
+          operational and protected.
+        </p>
+        <p>
+          Beyond the data center, I'm an avid world traveler. Navigating diverse cultures and complex
+          international environments has sharpened my ability to communicate across technical and
+          business silos — and to bring that same adaptability to forensic audits, helping teams
+          bridge the gap between legacy technical debt and modern cloud strategy.
+        </p>
+        <p>
+          With over 25 years in the Cisco UC ecosystem, I've seen that technical failures are rarely
+          the fault of the hardware. They're the result of poor discovery. I started this firm to
+          provide a forensic alternative to the staff-aug status quo — giving enterprise IT teams and
+          global partners a senior-level perspective they can trust.
+        </p>
+      </div>
+
+      <div class="credential-card">
+        <div class="credential-section">
+          <div class="credential-label">Core Specialties</div>
+          <ul class="credential-list">
+            <li>Cisco UCCE / UCCX</li>
+            <li>CUCM &amp; Unity Connection</li>
+            <li>E911 Compliance (Kari's Law / RAY BAUM's Act)</li>
+            <li>Amazon Connect</li>
+            <li>Webex Calling &amp; Contact Center</li>
+            <li>Multi-Vendor Migrations</li>
+          </ul>
+        </div>
+        <div class="credential-section">
+          <div class="credential-label">Credentials</div>
+          <div class="credential-badges">
+            <div class="credential-badge">
+              <span class="credential-badge-check">✓</span>
+              Cisco 360 Partner
+            </div>
+            <div class="credential-badge">
+              <span class="credential-badge-check">✓</span>
+              25+ Years Enterprise UC
+            </div>
+            <div class="credential-badge">
+              <span class="credential-badge-check">✓</span>
+              Veteran-Owned Business
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 3 — WHY STC
+════════════════════════════════════════════════════════════════ -->
+<section class="why-section" id="why-stc">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">Why Solution Track Consulting</span>
+      <h2 class="section-title">A Forensic Alternative to the Staff-Aug Status Quo.</h2>
+      <p class="section-subtitle">
+        Most UC and infrastructure engagements fail not because of the technology, but because
+        the wrong person was in the room. We built STC to fix that — one high-stakes engagement
+        at a time.
+      </p>
+    </div>
+    <div class="why-cards">
+      <div class="why-card">
+        <span class="why-card-emoji">🎯</span>
+        <h3>Mission-First Mindset</h3>
+        <p>
+          Military-trained discipline applied to enterprise engineering. Deadlines,
+          accountability, and follow-through aren't aspirations — they're the baseline.
+        </p>
+      </div>
+      <div class="why-card">
+        <span class="why-card-emoji">🧠</span>
+        <h3>Senior Execution Only</h3>
+        <p>
+          No juniors, no delegation to a team you've never met. Every engagement is
+          designed and delivered by the same engineer you spoke with on day one.
+        </p>
+      </div>
+      <div class="why-card">
+        <span class="why-card-emoji">🔬</span>
+        <h3>Forensic-First Approach</h3>
+        <p>
+          We don't start with solutions. We start with discovery — surfacing what's
+          actually in your environment before anyone touches a config.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CTA BAND
+════════════════════════════════════════════════════════════════ -->
+<section class="cta-band" id="contact-cta">
+  <div class="cta-band-dots cta-band-dots-1"></div>
+  <div class="cta-band-dots cta-band-dots-2"></div>
+  <h2>Let's Talk About Your Environment.</h2>
+  <p>
+    No sales pitch — just an honest conversation about what you're dealing with
+    and whether we're the right fit.
+  </p>
+  <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+     class="btn btn-primary" target="_blank" rel="noopener">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="2" stroke-linecap="round"
+         stroke-linejoin="round" style="width:16px;height:16px">
+      <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
+    </svg>
+    Book a 20-Minute Call
+  </a>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+        <p>Senior-level Cisco UC, Contact Center, and Network Infrastructure engineering for Enterprise IT teams and Service Providers.</p>
+        <div class="footer-badge">
+          <img src="https://www.solutiontrackconsulting.com/img/cisco-partner-badge.svg" alt="Cisco 360 Partner" />
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="e911-integrity.html">E911 Integrity Audit</a></li>
+          <li><a href="migration-audit.html">Forensic Migration Audit</a></li>
+          <li><a href="operational-audit.html">Operational Integrity Audit</a></li>
+          <li><a href="partner-support.html">Partner Capacity</a></li>
+          <li><a href="services.html">Systems &amp; Networking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/>
+          </svg>
+          Portland Metro, Oregon
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.41 2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 5.55 5.55l.92-.92a2 2 0 0 1 2.12-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <a href="tel:5039127788">503-912-7788</a>
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <a href="mailto:info@solutiontrackconsulting.com">info@solutiontrackconsulting.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear"></span> Solution Track Consulting. All rights reserved. &nbsp;&middot;&nbsp; Veteran-Owned Business</p>
+      <div class="footer-bottom-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="services.html">Services</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  const nav = document.querySelector('.site-nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 24px rgba(0,0,0,.4)' : 'none';
+  }, { passive: true });
+
+  const toggle    = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('navMobile');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    toggle.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
+  });
+  mobileNav.querySelectorAll('a').forEach(l => l.addEventListener('click', closeMobileNav));
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !mobileNav.contains(e.target)) closeMobileNav();
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMobileNav(); });
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity  = '1';
+        entry.target.style.transform = entry.target.style.transform.replace('translateY(20px)', 'translateY(0)');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.why-card, .hero-pill').forEach(el => {
+    el.style.opacity   = '0';
+    el.style.transform = (el.style.transform || '') + ' translateY(20px)';
+    el.style.transition = 'opacity .5s ease, transform .5s ease';
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
