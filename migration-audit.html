@@ -1,0 +1,437 @@
+<!-- STC Prototype v1 — migration-audit.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UC Migration Audit | Solution Track Consulting</title>
+  <meta name="description" content="Before you migrate from CUCM to Webex, Teams, or Amazon Connect — know what you're working with. STC's UC Migration Audit surfaces hidden debt before it follows you into the cloud." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --navy: #0a1f44; --navy-mid: #112958; --navy-light: #1e3a6e;
+      --blue: #1a6bcc; --blue-hover: #145db3;
+      --orange: #e86a2e; --orange-hover: #d05a20;
+      --bg-alt: #f0f4fa; --bg-white: #ffffff;
+      --text-dark: #0d1b2e; --text-mid: #3a4a60; --text-light: #6b7a96;
+      --border: #d8e2f0; --radius: 6px; --radius-lg: 12px;
+      --shadow-sm: 0 2px 8px rgba(10,31,68,.08);
+      --shadow-md: 0 6px 24px rgba(10,31,68,.13);
+      --font: 'Inter', system-ui, -apple-system, sans-serif;
+      --max-w: 1140px; --section-pad: 96px 24px;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font); font-size: 16px; line-height: 1.65; color: var(--text-dark); background: var(--bg-white); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .eyebrow { display: inline-block; font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--blue); margin-bottom: 14px; }
+    h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; }
+    .section-title { font-size: clamp(1.65rem, 3vw, 2.2rem); color: var(--navy); margin-bottom: 16px; }
+    .section-subtitle { font-size: 1.05rem; color: var(--text-mid); max-width: 640px; }
+    .section-header { text-align: center; margin-bottom: 56px; }
+    .section-header .section-subtitle { margin: 0 auto; }
+    .section-divider { height: 3px; background: linear-gradient(90deg, transparent, var(--blue) 30%, var(--orange) 70%, transparent); opacity: .2; }
+
+    /* Buttons */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 14px 30px; border-radius: 4px; font-family: var(--font); font-size: .95rem; font-weight: 600; cursor: pointer; border: 2px solid transparent; transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .15s; white-space: nowrap; }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+    .btn-primary { background: var(--blue); color: #fff; border-color: var(--blue); box-shadow: 0 3px 12px rgba(26,107,204,.30); }
+    .btn-primary:hover { background: var(--orange); border-color: var(--orange); box-shadow: 0 6px 20px rgba(232,106,46,.40); }
+    .btn-ghost { background: rgba(255,255,255,.12); color: #fff; border-color: rgba(255,255,255,.4); }
+    .btn-ghost:hover { background: rgba(255,255,255,.22); border-color: rgba(255,255,255,.7); }
+    .btn-sm { padding: 10px 20px; font-size: .87rem; }
+
+    /* NAV */
+    .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; background: rgba(10,31,68,.97); backdrop-filter: blur(12px); border-bottom: 1px solid rgba(255,255,255,.07); height: 68px; display: flex; align-items: center; transition: box-shadow .3s; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .nav-logo img { height: 40px; width: auto; }
+    .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
+    .nav-links a { padding: 8px 14px; border-radius: 6px; font-size: .9rem; font-weight: 500; color: rgba(255,255,255,.82); transition: color .2s, background .2s; }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
+    .nav-links a.active { color: #fff; background: rgba(255,255,255,.1); position: relative; }
+    .nav-links a.active::after { content: ''; position: absolute; bottom: -1px; left: 14px; right: 14px; height: 2px; background: var(--orange); border-radius: 2px; }
+    .nav-cta { margin-left: 8px; }
+    .nav-cta .btn { padding: 9px 20px; font-size: .87rem; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-toggle span { display: block; width: 24px; height: 2px; background: #fff; border-radius: 2px; transition: transform .25s, opacity .25s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; flex-direction: column; background: rgba(10,31,68,.99); position: fixed; top: 68px; left: 0; right: 0; z-index: 999; padding: 16px 24px 28px; border-bottom: 1px solid rgba(255,255,255,.08); box-shadow: 0 12px 32px rgba(0,0,0,.4); }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { padding: 14px 0; color: rgba(255,255,255,.82); font-size: 1rem; font-weight: 500; border-bottom: 1px solid rgba(255,255,255,.07); transition: color .15s; }
+    .nav-mobile a:last-of-type { border-bottom: none; }
+    .nav-mobile a:hover, .nav-mobile a.active { color: #fff; }
+    .nav-mobile .btn { margin-top: 16px; justify-content: center; width: 100%; }
+
+    /* Breadcrumb */
+    .breadcrumb-bar { background: var(--navy); border-bottom: 1px solid rgba(255,255,255,.07); padding: 12px 0; margin-top: 68px; }
+    .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: .82rem; color: rgba(255,255,255,.45); max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .breadcrumb a { color: rgba(255,255,255,.55); transition: color .15s; }
+    .breadcrumb a:hover { color: rgba(255,255,255,.9); }
+    .breadcrumb-sep { font-size: .7rem; opacity: .4; }
+    .breadcrumb-current { color: rgba(255,255,255,.8); font-weight: 500; }
+
+    /* Page hero */
+    .page-hero { background: linear-gradient(135deg, #0a1f44 0%, #112958 60%, #0d2d5a 100%); padding: 72px 24px 64px; position: relative; overflow: hidden; }
+    .page-hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(26,107,204,.15) 0%, transparent 70%), radial-gradient(ellipse 40% 60% at 20% 60%, rgba(232,106,46,.06) 0%, transparent 60%); pointer-events: none; }
+    .page-hero-dots { position: absolute; width: 160px; height: 160px; background-image: radial-gradient(circle, rgba(255,255,255,.15) 1.5px, transparent 1.5px); background-size: 18px 18px; pointer-events: none; }
+    .page-hero-dots-1 { top: 20px; right: 80px; }
+    .page-hero-dots-2 { bottom: 20px; left: 60px; }
+    .page-hero-inner { position: relative; z-index: 1; max-width: var(--max-w); margin: 0 auto; max-width: 800px; }
+    .page-hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; background: rgba(26,107,204,.2); border: 1px solid rgba(26,107,204,.35); border-radius: 40px; padding: 5px 16px 5px 10px; font-size: .8rem; font-weight: 600; color: rgba(255,255,255,.85); margin-bottom: 22px; }
+    .page-hero-dot { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; flex-shrink: 0; }
+    .page-hero h1 { font-size: clamp(1.9rem, 4vw, 2.8rem); font-weight: 800; color: #fff; margin-bottom: 16px; line-height: 1.15; }
+    .page-hero-sub { font-size: 1.08rem; color: rgba(255,255,255,.72); line-height: 1.72; max-width: 660px; margin-bottom: 32px; }
+    .page-hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* ── Pullquote ── */
+    .pullquote-band { background: var(--navy); padding: 64px 24px; position: relative; overflow: hidden; }
+    .pullquote-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 60% 100% at 50% 50%, rgba(26,107,204,.12) 0%, transparent 70%); pointer-events: none; }
+    .pullquote-inner { max-width: 800px; margin: 0 auto; position: relative; text-align: center; }
+    .pullquote-mark { font-size: 5rem; line-height: .6; color: var(--orange); font-weight: 800; font-family: Georgia, serif; display: block; margin-bottom: 16px; opacity: .7; }
+    .pullquote-text { font-size: clamp(1.2rem, 2.5vw, 1.55rem); font-style: italic; color: rgba(255,255,255,.92); line-height: 1.6; font-weight: 500; margin-bottom: 24px; }
+    .pullquote-attribution { font-size: .88rem; font-weight: 600; color: rgba(255,255,255,.5); letter-spacing: .04em; text-transform: uppercase; }
+    .pullquote-attribution span { color: var(--orange); }
+
+    /* ── Audit cards ── */
+    .audit-section { background: var(--bg-white); padding: var(--section-pad); position: relative; overflow: hidden; }
+    .audit-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: var(--max-w); margin: 0 auto; }
+    .audit-card { background: var(--bg-white); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 36px 28px; transition: box-shadow .25s, transform .2s, border-color .2s; position: relative; overflow: hidden; }
+    .audit-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--blue); }
+    .audit-card:nth-child(2)::before { background: var(--orange); }
+    .audit-card:nth-child(3)::before { background: var(--navy); }
+    .audit-card:hover { box-shadow: var(--shadow-md); transform: translateY(-3px); border-color: rgba(26,107,204,.2); }
+    .audit-emoji { font-size: 2.4rem; display: block; margin-bottom: 16px; line-height: 1; }
+    .audit-card h3 { font-size: 1.05rem; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+    .audit-card p { font-size: .9rem; color: var(--text-mid); line-height: 1.7; }
+    .audit-bullets { list-style: none; margin-top: 14px; display: flex; flex-direction: column; gap: 7px; }
+    .audit-bullets li { font-size: .85rem; color: var(--text-mid); display: flex; align-items: flex-start; gap: 8px; line-height: 1.55; }
+    .audit-bullets li::before { content: '→'; color: var(--blue); font-weight: 700; flex-shrink: 0; font-size: .82rem; margin-top: 1px; }
+
+    /* ── Deliverables ── */
+    .deliverables-section { background: var(--bg-alt); padding: var(--section-pad); position: relative; overflow: hidden; }
+    .deliverables-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; max-width: var(--max-w); margin: 0 auto; align-items: start; }
+    .deliverable-block { background: var(--bg-white); border-radius: var(--radius-lg); border: 1px solid var(--border); padding: 40px 36px; }
+    .deliverable-block h3 { font-size: 1.15rem; font-weight: 700; color: var(--navy); margin-bottom: 6px; }
+    .deliverable-block .deliverable-sub { font-size: .88rem; color: var(--text-light); font-style: italic; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .deliverable-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+    .deliverable-list li { display: flex; align-items: flex-start; gap: 12px; font-size: .93rem; color: var(--text-mid); line-height: 1.6; }
+    .deliverable-check { flex-shrink: 0; width: 20px; height: 20px; background: var(--blue); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-top: 1px; }
+    .deliverable-check::after { content: '✓'; color: #fff; font-size: .65rem; font-weight: 800; }
+    .deliverable-block:nth-child(2) .deliverable-check { background: var(--orange); }
+    .deliverables-cta { text-align: center; margin-top: 52px; }
+
+    /* CTA Band */
+    .cta-band { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, #0d2d5a 100%); padding: 88px 24px; text-align: center; position: relative; overflow: hidden; }
+    .cta-band::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 50%, rgba(26,107,204,.12) 0%, transparent 70%); }
+    .cta-band-dots { position: absolute; width: 160px; height: 160px; background-image: radial-gradient(circle, rgba(255,255,255,.18) 1.5px, transparent 1.5px); background-size: 18px 18px; pointer-events: none; }
+    .cta-band-dots-1 { top: 24px; right: 100px; }
+    .cta-band-dots-2 { bottom: 24px; left: 80px; }
+    .cta-band h2 { color: #fff; font-size: clamp(1.6rem, 3vw, 2.2rem); margin-bottom: 14px; position: relative; }
+    .cta-band p { color: rgba(255,255,255,.72); font-size: 1.05rem; margin-bottom: 36px; max-width: 540px; margin-left: auto; margin-right: auto; position: relative; line-height: 1.7; }
+    .cta-band .btn { font-size: 1rem; padding: 16px 40px; position: relative; }
+
+    /* Footer */
+    .site-footer { background: #060f20; padding: 64px 24px 32px; color: rgba(255,255,255,.55); }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,.07); }
+    .footer-brand img { height: 36px; width: auto; filter: brightness(0) invert(1); opacity: .85; margin-bottom: 16px; }
+    .footer-brand p { font-size: .88rem; line-height: 1.65; margin-bottom: 20px; }
+    .footer-badge img { height: 52px; width: auto; opacity: .55; filter: brightness(0) invert(1); }
+    .footer-col h4 { font-size: .78rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: .88rem; color: rgba(255,255,255,.5); transition: color .15s; }
+    .footer-col ul li a:hover { color: rgba(255,255,255,.9); }
+    .footer-contact p { display: flex; align-items: center; gap: 10px; font-size: .88rem; margin-bottom: 10px; }
+    .footer-contact svg { width: 15px; height: 15px; flex-shrink: 0; color: rgba(255,255,255,.3); }
+    .footer-contact a { transition: color .15s; }
+    .footer-contact a:hover { color: rgba(255,255,255,.9); }
+    .footer-bottom { padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: .8rem; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: .8rem; color: rgba(255,255,255,.3); transition: color .15s; }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.7); }
+
+    /* Scroll fade-in */
+    .fade-up { opacity: 0; transform: translateY(20px); transition: opacity .5s ease, transform .5s ease; }
+    .fade-up.visible { opacity: 1; transform: none; }
+
+    /* Responsive */
+    @media (max-width: 900px) {
+      .audit-cards        { grid-template-columns: 1fr; }
+      .deliverables-grid  { grid-template-columns: 1fr; }
+      .footer-top         { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 680px) {
+      :root { --section-pad: 72px 20px; }
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      .page-hero { padding: 48px 20px 52px; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="site-nav" id="siteNav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Solution Track Consulting — home">
+      <img src="assets/jph-logo.png" alt="Solution Track Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html" class="active">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="contact.html" class="btn btn-primary btn-sm">Book a Call</a>
+    </div>
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navMobile" aria-label="Open navigation menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<nav class="nav-mobile" id="navMobile" aria-label="Mobile navigation">
+  <a href="index.html">Home</a>
+  <a href="services.html" class="active">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="contact.html" class="btn btn-primary">Book a Call</a>
+</nav>
+
+<!-- BREADCRUMB -->
+<div class="breadcrumb-bar">
+  <div class="breadcrumb">
+    <a href="index.html">Home</a>
+    <span class="breadcrumb-sep">›</span>
+    <a href="services.html">Services</a>
+    <span class="breadcrumb-sep">›</span>
+    <span class="breadcrumb-current">UC Migration Audit</span>
+  </div>
+</div>
+
+<!-- PAGE HERO -->
+<section class="page-hero" aria-labelledby="heroHeading">
+  <div class="page-hero-dots page-hero-dots-1" aria-hidden="true"></div>
+  <div class="page-hero-dots page-hero-dots-2" aria-hidden="true"></div>
+  <div class="page-hero-inner">
+    <div class="page-hero-eyebrow">
+      <span class="page-hero-dot" aria-hidden="true"></span>
+      Strategic Audit — UC Migration
+    </div>
+    <h1 id="heroHeading">Don't Just Migrate<br>Your Technical Debt.</h1>
+    <p class="page-hero-sub">Moving from CUCM to Webex Calling, Microsoft Teams, or Amazon Connect is a major inflection point. STC surfaces what your vendor's migration tool will never show you — so you lead the transition instead of inheriting its problems.</p>
+    <div class="page-hero-actions">
+      <a href="contact.html" class="btn btn-primary">Schedule Your Migration Audit</a>
+      <a href="services.html" class="btn btn-ghost">View All Services</a>
+    </div>
+  </div>
+</section>
+
+<!-- PULLQUOTE -->
+<div class="pullquote-band" aria-label="Featured quote">
+  <div class="pullquote-inner">
+    <span class="pullquote-mark" aria-hidden="true">"</span>
+    <p class="pullquote-text">Every migration I've walked into had at least one dial plan artifact that had been wrong for years — nobody knew, nobody touched it, and the cloud platform happily carried it forward. Finding that before go-live is the whole job.</p>
+    <p class="pullquote-attribution">— <span>Stephen Frahm</span>, Principal Consultant, Solution Track Consulting</p>
+  </div>
+</div>
+
+<!-- WHAT WE AUDIT -->
+<section class="audit-section" aria-labelledby="auditHeading">
+  <div class="section-header fade-up">
+    <span class="eyebrow">Scope of Work</span>
+    <h2 class="section-title" id="auditHeading">What We Audit</h2>
+    <p class="section-subtitle">Three forensic workstreams, executed before your migration window opens.</p>
+  </div>
+  <div class="audit-cards">
+    <div class="audit-card fade-up">
+      <span class="audit-emoji" aria-hidden="true">🗺️</span>
+      <h3>Dial Plan Forensics</h3>
+      <p>We map every route pattern, translation rule, and dial peer against actual call traffic — not documentation. What's routing where, what's dead, and what will break in a cloud-native dial plan.</p>
+      <ul class="audit-bullets">
+        <li>Route group and route list validation</li>
+        <li>Translation pattern conflict analysis</li>
+        <li>PSTN gateway dependency mapping</li>
+        <li>Numbering plan gap identification</li>
+      </ul>
+    </div>
+    <div class="audit-card fade-up">
+      <span class="audit-emoji" aria-hidden="true">⚙️</span>
+      <h3>Workflow Integrity Review</h3>
+      <p>Auto-attendants, hunt groups, call queues, and UCCX/UCCE flows that have accumulated years of undocumented changes. We trace what actually happens — not what the original design intended.</p>
+      <ul class="audit-bullets">
+        <li>IVR and AA script audit</li>
+        <li>Hunt group behavior verification</li>
+        <li>After-hours and holiday routing gaps</li>
+        <li>CRM integration dependency check</li>
+      </ul>
+    </div>
+    <div class="audit-card fade-up">
+      <span class="audit-emoji" aria-hidden="true">🚨</span>
+      <h3>Liability Scrub</h3>
+      <p>E911, MLTS compliance, and recording obligations don't disappear when you move to the cloud — they follow the call. We flag every compliance gap before it becomes a regulatory incident post-cutover.</p>
+      <ul class="audit-bullets">
+        <li>E911 dispatchable location audit</li>
+        <li>Kari's Law and RAY BAUM's Act gap review</li>
+        <li>Recording and retention obligation mapping</li>
+        <li>HIPAA/FERPA-relevant call routing flags</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider" aria-hidden="true"></div>
+
+<!-- WHAT YOU GET -->
+<section class="deliverables-section" aria-labelledby="deliverableHeading">
+  <div class="section-header fade-up">
+    <span class="eyebrow">Deliverables</span>
+    <h2 class="section-title" id="deliverableHeading">What You Get</h2>
+    <p class="section-subtitle">Two documents your migration team can act on immediately — no interpretation required.</p>
+  </div>
+  <div class="deliverables-grid">
+    <div class="deliverable-block fade-up">
+      <h3>Infrastructure Health Report</h3>
+      <p class="deliverable-sub">Current-state documentation your migration vendor should have produced but didn't</p>
+      <ul class="deliverable-list">
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Annotated dial plan export with usage data and conflict flags
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Dependency map: gateways, trunks, third-party integrations
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Dead configuration inventory (routes, devices, users with no call activity)
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          E911 compliance gap summary with remediation priority ranking
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Call flow diagrams for every IVR, AA, and hunt group in scope
+        </li>
+      </ul>
+    </div>
+    <div class="deliverable-block fade-up">
+      <h3>Strategic Migration Roadmap</h3>
+      <p class="deliverable-sub">A sequenced migration plan built around what actually exists — not the vendor's template</p>
+      <ul class="deliverable-list">
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Phase-gated migration sequence with risk-weighted ordering
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Target-state architecture recommendations (Webex / Teams / Connect)
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Rollback checkpoint definitions for each migration phase
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          Compliance remediation tasks sequenced before cutover
+        </li>
+        <li>
+          <span class="deliverable-check" aria-hidden="true"></span>
+          30-minute executive briefing to walk your leadership through findings
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="deliverables-cta fade-up">
+    <a href="contact.html" class="btn btn-primary">Schedule Your Migration Audit</a>
+  </div>
+</section>
+
+<!-- CTA BAND -->
+<section class="cta-band" aria-labelledby="ctaHeading">
+  <div class="cta-band-dots cta-band-dots-1" aria-hidden="true"></div>
+  <div class="cta-band-dots cta-band-dots-2" aria-hidden="true"></div>
+  <h2 id="ctaHeading">Know What You're Working With Before You Commit.</h2>
+  <p>Migration windows are short and rollbacks are painful. Get the audit done before you're under pressure.</p>
+  <a href="contact.html" class="btn btn-primary">Book Your Audit Consultation</a>
+</section>
+
+<!-- FOOTER -->
+<footer class="site-footer" role="contentinfo">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="assets/jph-logo.png" alt="Solution Track Consulting" />
+        <p>Enterprise UC and infrastructure consulting. Veteran-owned, Pacific Northwest-based, globally deployed.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="e911-integrity.html">E911 Integrity Audit</a></li>
+          <li><a href="migration-audit.html">UC Migration Audit</a></li>
+          <li><a href="operational-audit.html">Operational Health Audit</a></li>
+          <li><a href="partner-support.html">Partner Capacity Support</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About STC</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:stephen@solutiontrack.consulting">stephen@solutiontrack.consulting</a>
+        </p>
+        <p>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Pacific Northwest, USA
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 Solution Track Consulting. All rights reserved.</p>
+      <div class="footer-bottom-links">
+        <a href="contact.html">Privacy</a>
+        <a href="contact.html">Terms</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Nav scroll shadow
+  const nav = document.getElementById('siteNav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 12 ? '0 4px 24px rgba(0,0,0,.28)' : '';
+  }, { passive: true });
+
+  // Mobile nav
+  const toggle = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('navMobile');
+  function openNav() { mobileNav.classList.add('open'); toggle.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); document.body.style.overflow = 'hidden'; }
+  function closeNav() { mobileNav.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded', 'false'); document.body.style.overflow = ''; }
+  toggle.addEventListener('click', () => mobileNav.classList.contains('open') ? closeNav() : openNav());
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  // Scroll fade-in
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => io.observe(el));
+</script>
+</body>
+</html>
