@@ -906,9 +906,8 @@
       margin-bottom: 20px;
     }
     .footer-badge img {
-      height: 52px; width: auto;
-      opacity: .55;
-      filter: brightness(0) invert(1);
+      width: 80px;
+      height: auto;
     }
 
     .footer-col h4 {
@@ -1035,6 +1034,9 @@
     }
     .icon-white { stroke: #ffffff; }
     .icon-orange { stroke: #e86a2e; }
+    /* Cisco Badge */
+    .cisco-badge-link { display: inline-block; padding: 6px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(white, white), linear-gradient(135deg, #049fd9, #00bceb, #6cc04a, #049fd9); background-origin: border-box; background-clip: padding-box, border-box; transition: opacity 0.2s ease; }
+    .cisco-badge-link:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
@@ -1574,8 +1576,10 @@
           for Enterprise IT teams and Service Providers.
         </p>
         <div class="footer-badge">
-          <img src="https://www.solutiontrackconsulting.com/img/cisco-partner-badge.svg"
-               alt="Cisco 360 Partner" />
+          <a href="https://www.cisco.com/c/en/us/partners.html" class="cisco-badge-link" target="_blank" rel="noopener">
+            <img src="https://www.solutiontrackconsulting.com/img/cisco-partner-badge.svg"
+                 alt="Cisco 360 Partner" />
+          </a>
         </div>
       </div>
 

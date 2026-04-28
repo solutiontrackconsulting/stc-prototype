@@ -831,9 +831,8 @@
       margin-bottom: 20px;
     }
     .footer-badge img {
-      height: 52px; width: auto;
-      opacity: .55;
-      filter: brightness(0) invert(1);
+      width: 80px;
+      height: auto;
     }
     .footer-col h4 {
       font-size: .78rem;
@@ -939,6 +938,17 @@
     }
     .icon-white { stroke: #ffffff; }
     .icon-orange { stroke: #e86a2e; }
+    /* Engagement Models Strip */
+    .engagement-strip { background: #f0f4fa; padding: 64px 24px; }
+    .engagement-strip-inner { max-width: var(--max-w); margin: 0 auto; }
+    .engagement-strip .eyebrow { display: block; text-align: center; margin-bottom: 40px; }
+    .engagement-strip-cols { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
+    .engagement-strip-col strong { display: block; font-size: 1rem; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .engagement-strip-col p { font-size: .92rem; color: var(--text-mid); line-height: 1.65; margin: 0; }
+    @media (max-width: 680px) { .engagement-strip-cols { grid-template-columns: 1fr; } }
+    /* Cisco Badge */
+    .cisco-badge-link { display: inline-block; padding: 6px; border-radius: 12px; border: 2px solid transparent; background-image: linear-gradient(white, white), linear-gradient(135deg, #049fd9, #00bceb, #6cc04a, #049fd9); background-origin: border-box; background-clip: padding-box, border-box; transition: opacity 0.2s ease; }
+    .cisco-badge-link:hover { opacity: 0.85; }
   </style>
 </head>
 <body>
@@ -1145,7 +1155,7 @@
                  stroke-linejoin="round" style="width:14px;height:14px">
               <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
             </svg>
-            Discuss Your Migration
+            Schedule a Discovery Call
           </a>
         </div>
       </div>
@@ -1167,7 +1177,7 @@
                  stroke-linejoin="round" style="width:14px;height:14px">
               <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
             </svg>
-            Start the Conversation
+            Schedule a Discovery Call
           </a>
         </div>
       </div>
@@ -1277,87 +1287,24 @@
 
 
 <!-- ═══════════════════════════════════════════════════════════════
-     SECTION 5 — ENTERPRISE IT TEAMS
+     ENGAGEMENT MODELS STRIP
 ════════════════════════════════════════════════════════════════ -->
-<section class="enterprise-section" id="enterprise">
-  <div class="container">
-    <div class="enterprise-inner reveal">
-
-      <div class="enterprise-content">
-        <span class="eyebrow">Enterprise Engagements</span>
-        <h2>Senior-Level Help for Complex UC Environments.</h2>
-        <p>
-          CUCM upgrades. Legacy UC remediation. Dial plan cleanup. E911 validation.
-          Contact Center enhancements. We've seen every version of these problems and
-          have delivered on every one of them.
-        </p>
-
-        <div class="requests-list">
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            CUCM upgrades (10.x through 15)
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            Legacy UC remediation and dial plan cleanup
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            E911 validation and remediation (Kari's Law / RAY BAUM's Act)
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            UCCX / Webex Contact Center enhancements
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            Multi-site UC assessments
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            Amazon Connect architecture and deployment
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            Ubiquiti network infrastructure
-          </div>
-          <div class="request-item">
-            <span class="request-arrow">→</span>
-            Enterprise system administration
-          </div>
-        </div>
-
-        <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
-           class="btn btn-primary" target="_blank" rel="noopener">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-               stroke="currentColor" stroke-width="2" stroke-linecap="round"
-               stroke-linejoin="round" style="width:16px;height:16px">
-            <path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/>
-          </svg>
-          Discuss Your Environment
-        </a>
+<section class="engagement-strip">
+  <div class="engagement-strip-inner">
+    <span class="eyebrow">How Engagements Work</span>
+    <div class="engagement-strip-cols">
+      <div class="engagement-strip-col">
+        <strong>Project-Based</strong>
+        <p>Defined scope, fixed deliverables, clean handoff. You know exactly what you are getting.</p>
       </div>
-
-      <div>
-        <div class="engagement-cards">
-          <h4>Engagement Models</h4>
-          <div class="engagement-row">
-            <div class="engagement-card reveal">
-              <strong>Project-Based</strong>
-              <p>Defined scope, fixed deliverables, clean handoff.</p>
-            </div>
-            <div class="engagement-card reveal" style="transition-delay:.1s">
-              <strong>Retainer</strong>
-              <p>Ongoing senior support on a monthly basis.</p>
-            </div>
-            <div class="engagement-card reveal" style="transition-delay:.2s">
-              <strong>Subcontract</strong>
-              <p>Embedded on your team for a specific engagement.</p>
-            </div>
-          </div>
-        </div>
+      <div class="engagement-strip-col">
+        <strong>Retainer</strong>
+        <p>Ongoing senior UC support on a monthly basis. We stay close to your environment.</p>
       </div>
-
+      <div class="engagement-strip-col">
+        <strong>Subcontract</strong>
+        <p>Embedded on your team for a specific engagement. Your client never knows we are there.</p>
+      </div>
     </div>
   </div>
 </section>
@@ -1399,8 +1346,10 @@
           for Enterprise IT teams and Service Providers.
         </p>
         <div class="footer-badge">
-          <img src="https://www.solutiontrackconsulting.com/img/cisco-partner-badge.svg"
-               alt="Cisco 360 Partner" />
+          <a href="https://www.cisco.com/c/en/us/partners.html" class="cisco-badge-link" target="_blank" rel="noopener">
+            <img src="https://www.solutiontrackconsulting.com/img/cisco-partner-badge.svg"
+                 alt="Cisco 360 Partner" />
+          </a>
         </div>
       </div>
 
