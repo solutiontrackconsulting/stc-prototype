@@ -905,6 +905,28 @@
     @media (max-width: 480px) {
       .page-hero h1 { font-size: 1.6rem; }
     }
+
+    /* ─── Page Transition ───────────────────────────────────────────────── */
+    body { animation: pageFadeIn 0.4s ease forwards; }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    /* ─── Scroll Reveal ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -1060,7 +1082,7 @@
     </div>
 
     <div class="audience-grid">
-      <div class="audience-card">
+      <div class="audience-card reveal">
         <span class="audience-emoji">🤝</span>
         <h3>For IT Service Providers</h3>
         <p>
@@ -1076,7 +1098,7 @@
         </a>
       </div>
 
-      <div class="audience-card">
+      <div class="audience-card reveal" style="transition-delay:.15s">
         <span class="audience-emoji">🏢</span>
         <h3>For Enterprise IT Teams</h3>
         <p>
@@ -1115,7 +1137,7 @@
     <div class="audits-grid">
 
       <!-- Card 1: E911 -->
-      <div class="audit-card">
+      <div class="audit-card reveal">
         <span class="audit-emoji">🚨</span>
         <h3>E911 Strategic Integrity Audit</h3>
         <p>
@@ -1148,7 +1170,7 @@
       </div>
 
       <!-- Card 2: Migration -->
-      <div class="audit-card">
+      <div class="audit-card reveal" style="transition-delay:.1s">
         <span class="audit-emoji">🔍</span>
         <h3>Forensic Migration Audit</h3>
         <p>
@@ -1171,7 +1193,7 @@
       </div>
 
       <!-- Card 3: Operational -->
-      <div class="audit-card">
+      <div class="audit-card reveal" style="transition-delay:.2s">
         <span class="audit-emoji">⚙️</span>
         <h3>Operational Integrity Audit</h3>
         <p>
@@ -1205,7 +1227,7 @@
 <section class="partner-section" id="partner">
   <div class="dots-accent" style="bottom:40px;right:60px;"></div>
   <div class="container">
-    <div class="partner-inner">
+    <div class="partner-inner reveal">
 
       <div class="partner-lead">
         <span class="eyebrow">Partner Capacity</span>
@@ -1303,7 +1325,7 @@
 ════════════════════════════════════════════════════════════════ -->
 <section class="enterprise-section" id="enterprise">
   <div class="container">
-    <div class="enterprise-inner">
+    <div class="enterprise-inner reveal">
 
       <div class="enterprise-content">
         <span class="eyebrow">Enterprise Engagements</span>
@@ -1364,15 +1386,15 @@
         <div class="engagement-cards">
           <h4>Engagement Models</h4>
           <div class="engagement-row">
-            <div class="engagement-card">
+            <div class="engagement-card reveal">
               <strong>Project-Based</strong>
               <p>Defined scope, fixed deliverables, clean handoff.</p>
             </div>
-            <div class="engagement-card">
+            <div class="engagement-card reveal" style="transition-delay:.1s">
               <strong>Retainer</strong>
               <p>Ongoing senior support on a monthly basis.</p>
             </div>
-            <div class="engagement-card">
+            <div class="engagement-card reveal" style="transition-delay:.2s">
               <strong>Subcontract</strong>
               <p>Embedded on your team for a specific engagement.</p>
             </div>
@@ -1532,25 +1554,29 @@
     if (e.key === 'Escape') closeMobileNav();
   });
 
-  const io = new IntersectionObserver((entries) => {
+  // Page fade transition
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity  = '1';
-        entry.target.style.transform = entry.target.style.transform
-          .replace('translateY(20px)', 'translateY(0)');
-        io.unobserve(entry.target);
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
-
-  document.querySelectorAll(
-    '.audience-card, .audit-card, .engagement-card, .feature-row, .request-item'
-  ).forEach(el => {
-    el.style.opacity   = '0';
-    el.style.transform = (el.style.transform || '') + ' translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    io.observe(el);
-  });
+  }, { threshold: 0.12 });
+  revealElements.forEach(el => revealObserver.observe(el));
 </script>
 
 </body>

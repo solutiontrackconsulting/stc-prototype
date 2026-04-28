@@ -184,6 +184,28 @@
       .footer-top { grid-template-columns: 1fr; }
       .footer-bottom { flex-direction: column; align-items: flex-start; }
     }
+
+    /* ─── Page Transition ───────────────────────────────────────────────── */
+    body { animation: pageFadeIn 0.4s ease forwards; }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    /* ─── Scroll Reveal ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -270,17 +292,17 @@
     </div>
 
     <div class="integrity-cols">
-      <div class="integrity-col">
+      <div class="integrity-col reveal">
         <span class="integrity-col-emoji">🌐</span>
         <h3>Network Discovery</h3>
         <p>"What's actually on your network?"</p>
       </div>
-      <div class="integrity-col">
+      <div class="integrity-col reveal" style="transition-delay:.1s">
         <span class="integrity-col-emoji">🏢</span>
         <h3>Physical Facilities</h3>
         <p>"Do your floors and rooms match your data?"</p>
       </div>
-      <div class="integrity-col">
+      <div class="integrity-col reveal" style="transition-delay:.2s">
         <span class="integrity-col-emoji">🎙️</span>
         <h3>Voice Configuration</h3>
         <p>"Does your CUCM E911 logic reflect reality?"</p>
@@ -304,7 +326,7 @@
     </div>
 
     <div class="phase-cards">
-      <div class="phase-card">
+      <div class="phase-card reveal">
         <div class="phase-number">1</div>
         <div class="phase-body">
           <span class="phase-tag">Integrity Assessment</span>
@@ -312,7 +334,7 @@
           <p>A collaborative session to map the requirements of Kari's Law and RAY BAUM's Act against your current configuration and identify immediate liability gaps. May lead to a discovery call as needed.</p>
         </div>
       </div>
-      <div class="phase-card">
+      <div class="phase-card reveal" style="transition-delay:.1s">
         <div class="phase-number">2</div>
         <div class="phase-body">
           <span class="phase-tag">Onsite Validation</span>
@@ -320,7 +342,7 @@
           <p>A focused engagement to validate physical floor plans against system data. We align your "halls and floors" with your digital infrastructure — working across IT, Facilities, Safety, Security, and Legal to break down silos that create compliance risk.</p>
         </div>
       </div>
-      <div class="phase-card">
+      <div class="phase-card reveal" style="transition-delay:.2s">
         <div class="phase-number">3</div>
         <div class="phase-body">
           <span class="phase-tag">Managed Governance</span>
@@ -352,17 +374,17 @@
     </div>
 
     <div class="sector-cards">
-      <div class="sector-card">
+      <div class="sector-card reveal">
         <span class="sector-emoji">🏥</span>
         <h3>Healthcare</h3>
         <p>Hospitals, health systems, and multi-site medical groups where 911 accuracy across patient floors and wings is a regulatory and moral imperative.</p>
       </div>
-      <div class="sector-card">
+      <div class="sector-card reveal" style="transition-delay:.1s">
         <span class="sector-emoji">🎓</span>
         <h3>Education</h3>
         <p>K-12 and higher education campuses where Alyssa's Law and Kari's Law compliance intersects with complex building and device sprawl.</p>
       </div>
-      <div class="sector-card">
+      <div class="sector-card reveal" style="transition-delay:.2s">
         <span class="sector-emoji">🏭</span>
         <h3>Manufacturing</h3>
         <p>Large-footprint industrial environments where floor mapping and device location accuracy can mean the difference between a fast and delayed emergency response.</p>
@@ -440,8 +462,29 @@
   mobileNav.querySelectorAll('a').forEach(l => l.addEventListener('click', closeNav));
   document.addEventListener('click', e => { if (!nav.contains(e.target) && !mobileNav.contains(e.target)) closeNav(); });
   document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
-  const io = new IntersectionObserver(entries => { entries.forEach(e => { if (e.isIntersecting) { e.target.style.opacity='1'; e.target.style.transform=e.target.style.transform.replace('translateY(20px)','translateY(0)'); io.unobserve(e.target); } }); }, { threshold: 0.1 });
-  document.querySelectorAll('.integrity-col, .phase-card, .sector-card').forEach(el => { el.style.opacity='0'; el.style.transform=(el.style.transform||'')+' translateY(20px)'; el.style.transition='opacity .5s ease, transform .5s ease'; io.observe(el); });
+  // Page fade transition
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealElements.forEach(el => revealObserver.observe(el));
 </script>
 </body>
 </html>

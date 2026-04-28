@@ -1001,6 +1001,28 @@
       .hero-stat { width: 100%; flex-direction: row; justify-content: flex-start; gap: 12px; }
       .hero-stat-number { font-size: 1.6rem; margin-bottom: 0; }
     }
+
+    /* ─── Page Transition ───────────────────────────────────────────────── */
+    body { animation: pageFadeIn 0.4s ease forwards; }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+    /* ─── Scroll Reveal ─────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
   </style>
 </head>
 <body>
@@ -1182,7 +1204,7 @@
 
       <div>
         <div class="pain-list">
-          <div class="pain-item">
+          <div class="pain-item reveal">
             <div class="pain-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1194,7 +1216,7 @@
             <p class="pain-text">E911 configuration that hasn't been validated since the last office move</p>
           </div>
 
-          <div class="pain-item">
+          <div class="pain-item reveal" style="transition-delay:.1s">
             <div class="pain-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1207,7 +1229,7 @@
             <p class="pain-text">A migration plan stalled because nobody's sure what's actually in the environment</p>
           </div>
 
-          <div class="pain-item">
+          <div class="pain-item reveal" style="transition-delay:.2s">
             <div class="pain-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1221,7 +1243,7 @@
           </div>
         </div>
 
-        <div class="pain-close">
+        <div class="pain-close reveal">
           We've seen all of it. We know where to look.
         </div>
       </div>
@@ -1244,7 +1266,7 @@
 
     <div class="services-grid">
       <!-- Strategic Audits -->
-      <div class="service-card">
+      <div class="service-card reveal">
         <div class="service-card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1283,7 +1305,7 @@
       </div>
 
       <!-- Partner Capacity -->
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:.1s">
         <div class="service-card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1308,7 +1330,7 @@
       </div>
 
       <!-- Systems & Networking -->
-      <div class="service-card">
+      <div class="service-card reveal" style="transition-delay:.2s">
         <div class="service-card-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1353,7 +1375,7 @@
     </div>
 
     <div class="how-steps">
-      <div class="how-step">
+      <div class="how-step reveal">
         <div class="how-step-number">1</div>
         <div class="how-step-body">
           <h3>Look</h3>
@@ -1362,7 +1384,7 @@
           </p>
         </div>
       </div>
-      <div class="how-step">
+      <div class="how-step reveal" style="transition-delay:.1s">
         <div class="how-step-number">2</div>
         <div class="how-step-body">
           <h3>Fix</h3>
@@ -1371,7 +1393,7 @@
           </p>
         </div>
       </div>
-      <div class="how-step">
+      <div class="how-step reveal" style="transition-delay:.2s">
         <div class="how-step-number">3</div>
         <div class="how-step-body">
           <h3>Hand Off</h3>
@@ -1414,7 +1436,7 @@
     </div>
 
     <div class="testimonials-grid">
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal">
         <div class="testimonial-quote-mark">&ldquo;</div>
         <p class="testimonial-text">
           After years of Band-Aid fixes from other vendors, STC came in and actually
@@ -1427,7 +1449,7 @@
         </div>
       </div>
 
-      <div class="testimonial-card">
+      <div class="testimonial-card reveal" style="transition-delay:.1s">
         <div class="testimonial-quote-mark">&ldquo;</div>
         <p class="testimonial-text">
           We brought Solution Track in as a white-label resource for a complex multi-site
@@ -1459,31 +1481,31 @@
     </div>
 
     <div class="diff-grid">
-      <div class="diff-card">
+      <div class="diff-card reveal">
         <span class="diff-card-emoji">👤</span>
         <h3>You work with Stephen</h3>
         <p>Not a team you've never met. Not a junior engineer filling a seat.</p>
       </div>
 
-      <div class="diff-card">
+      <div class="diff-card reveal" style="transition-delay:.1s">
         <span class="diff-card-emoji">📋</span>
         <h3>No long-term contracts</h3>
         <p>Project-based work. We stay accountable to outcomes, not retainers.</p>
       </div>
 
-      <div class="diff-card">
+      <div class="diff-card reveal" style="transition-delay:.2s">
         <span class="diff-card-emoji">🖥️</span>
         <h3>Cisco UC is all we do</h3>
         <p>CUCM, Contact Center, Webex, Unity. Not a side practice.</p>
       </div>
 
-      <div class="diff-card">
+      <div class="diff-card reveal" style="transition-delay:.3s">
         <span class="diff-card-emoji">🚨</span>
         <h3>E911 specialists</h3>
         <p>Kari's Law and RAY BAUM's Act compliance is work we know cold.</p>
       </div>
 
-      <div class="diff-card">
+      <div class="diff-card reveal" style="transition-delay:.4s">
         <span class="diff-card-emoji">🎖️</span>
         <h3>Veteran-owned</h3>
         <p>Portland Metro based. Available nationwide.</p>
@@ -1661,29 +1683,29 @@
     if (e.key === 'Escape') closeMobileNav();
   });
 
-  // Scroll fade-in
-  const fadeTargets = document.querySelectorAll(
-    '.service-card, .how-step, .diff-card, .pain-item, .pain-close, ' +
-    '.testimonial-card, .serve-card'
-  );
+  // Page fade transition
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
 
-  const io = new IntersectionObserver((entries) => {
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.opacity  = '1';
-        entry.target.style.transform = entry.target.style.transform
-          .replace('translateY(20px)', 'translateY(0)');
-        io.unobserve(entry.target);
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.1 });
-
-  fadeTargets.forEach(el => {
-    el.style.opacity    = '0';
-    el.style.transform  = (el.style.transform || '') + ' translateY(20px)';
-    el.style.transition = 'opacity .5s ease, transform .5s ease';
-    io.observe(el);
-  });
+  }, { threshold: 0.12 });
+  revealElements.forEach(el => revealObserver.observe(el));
 </script>
 
 </body>
