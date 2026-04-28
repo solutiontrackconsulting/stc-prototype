@@ -191,6 +191,18 @@
       transform: translateY(8px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      stroke: #1a6bcc;
+      stroke-width: 1.5;
+      fill: none;
+      flex-shrink: 0;
+    }
+    .icon-white { stroke: #ffffff; }
+    .icon-orange { stroke: #e86a2e; }
   </style>
 </head>
 <body>
@@ -255,7 +267,7 @@
 <!-- CALLOUT STRIP -->
 <div class="callout-strip" role="note">
   <div class="callout-strip-inner">
-    <span class="callout-strip-icon" aria-hidden="true">⚠️</span>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z" /></svg>
     <p>Most UC operational problems aren't talent problems — they're <span>documentation debt, undocumented change history, and monitoring blind spots</span> that compound over time until every outage feels like a surprise.</p>
   </div>
 </div>
@@ -269,7 +281,7 @@
   </div>
   <div class="audit-cards">
     <div class="audit-card fade-up">
-      <span class="audit-emoji" aria-hidden="true">🔍</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" /></svg>
       <h3>Change Control Archaeology</h3>
       <p>Your environment has been touched by dozens of hands over the years. We reconstruct what was actually changed — and why — so you can stop treating your own system as a black box.</p>
       <ul class="audit-bullets">
@@ -280,7 +292,7 @@
       </ul>
     </div>
     <div class="audit-card fade-up">
-      <span class="audit-emoji" aria-hidden="true">📊</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" /></svg>
       <h3>Monitoring and Alerting Gaps</h3>
       <p>If you're finding out about problems from end users instead of your monitoring stack, your observability posture has eroded. We map what you're watching, what you're missing, and what silence actually means.</p>
       <ul class="audit-bullets">
@@ -291,7 +303,7 @@
       </ul>
     </div>
     <div class="audit-card fade-up">
-      <span class="audit-emoji" aria-hidden="true">📋</span>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
       <h3>Documentation and Runbook Integrity</h3>
       <p>Documentation that doesn't match the live environment is worse than no documentation — it costs you time during an incident. We verify what exists, what's stale, and what's missing entirely.</p>
       <ul class="audit-bullets">
@@ -316,7 +328,7 @@
     </div>
     <div class="feature-callouts">
       <div class="feature-callout fade-up">
-        <div class="feature-callout-icon" aria-hidden="true">📄</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
         <h3>Operational Health Report</h3>
         <p>A candid, prioritized assessment of where your environment stands — written for engineers, not executives. Every finding ranked by operational risk and remediation complexity.</p>
         <ul class="feature-list">
@@ -328,7 +340,7 @@
         </ul>
       </div>
       <div class="feature-callout fade-up">
-        <div class="feature-callout-icon" aria-hidden="true">🗺️</div>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="icon" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498 4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 0 0-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0Z" /></svg>
         <h3>90-Day Stabilization Roadmap</h3>
         <p>A sequenced remediation plan your team can execute without outside help — prioritized by impact, scoped to your available capacity, and designed to compound over time.</p>
         <ul class="feature-list">
