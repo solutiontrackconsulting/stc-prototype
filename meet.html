@@ -1,0 +1,561 @@
+<!-- STC Prototype v1 -- meet.html -- Post-handshake landing page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Great Connecting With You | Solution Track Consulting</title>
+  <meta name="description" content="Let's continue the conversation. Book a short call to explore whether Solution Track Consulting is the right fit for your UC environment." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0a1f44;
+      --navy-mid:    #112958;
+      --navy-light:  #1e3a6e;
+      --blue:        #1a6bcc;
+      --blue-hover:  #145db3;
+      --orange:      #e86a2e;
+      --orange-hover:#d05a20;
+      --bg-alt:      #f0f4fa;
+      --bg-white:    #ffffff;
+      --text-dark:   #0d1b2e;
+      --text-mid:    #3a4a60;
+      --text-light:  #6b7a96;
+      --border:      #d8e2f0;
+      --radius:      6px;
+      --radius-lg:   12px;
+      --shadow-sm:   0 2px 8px rgba(10,31,68,.08);
+      --shadow-md:   0 6px 24px rgba(10,31,68,.13);
+      --shadow-lg:   0 16px 48px rgba(10,31,68,.18);
+      --font:        'Inter', system-ui, -apple-system, sans-serif;
+      --max-w:       1140px;
+      --section-pad: 96px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Typography helpers ────────────────────────────────────────────── */
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 14px;
+    }
+
+    h1, h2, h3, h4 { line-height: 1.2; font-weight: 700; }
+
+    .section-title {
+      font-size: clamp(1.65rem, 3vw, 2.2rem);
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      max-width: 640px;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+    .section-header .section-subtitle { margin: 0 auto; }
+
+    /* ─── Buttons ───────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      box-shadow: 0 3px 12px rgba(26,107,204,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 6px 20px rgba(232,106,46,.40);
+    }
+
+    /* ─── HEADER ────────────────────────────────────────────────────────── */
+    .site-header {
+      background: var(--bg-white);
+      border-bottom: 1px solid var(--border);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .header-logo { display: inline-block; }
+    .header-logo img { height: 40px; width: auto; }
+
+    /* ─── HERO ──────────────────────────────────────────────────────────── */
+    .hero {
+      background: var(--bg-white);
+      padding: 96px 24px 72px;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .hero-title {
+      font-size: clamp(2rem, 5vw, 3.2rem);
+      color: var(--navy);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 28px;
+    }
+
+    .hero-body {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.78;
+      margin-bottom: 0;
+    }
+
+    /* ─── NEXT STEP SECTION ─────────────────────────────────────────────── */
+    .next-section {
+      background: var(--bg-alt);
+      padding: 96px 24px;
+      position: relative;
+    }
+
+    .next-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .next-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 18px;
+      display: block;
+    }
+
+    .next-title {
+      font-size: clamp(1.75rem, 4vw, 2.4rem);
+      color: var(--navy);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 18px;
+    }
+
+    .next-body {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 48px;
+    }
+
+    .next-cta {
+      display: inline-block;
+    }
+
+    .next-cta .btn {
+      padding: 16px 40px;
+      font-size: 1rem;
+    }
+
+    /* ─── CAPABILITIES SECTION ──────────────────────────────────────────── */
+    .capabilities-section {
+      background: var(--bg-white);
+      padding: 96px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .capabilities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      max-width: var(--max-w);
+      margin: 0 auto;
+    }
+
+    .capability-card {
+      background: var(--bg-white);
+      border-radius: var(--radius-lg);
+      padding: 32px 28px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      transition: box-shadow .25s, transform .2s, border-color .2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .capability-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-4px);
+      border-color: rgba(26,107,204,.25);
+    }
+
+    .capability-icon {
+      width: 48px;
+      height: 48px;
+      background: rgba(26,107,204,.1);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 18px;
+      color: var(--blue);
+    }
+    .capability-icon svg { width: 23px; height: 23px; }
+
+    .capability-card h3 {
+      color: var(--navy);
+      margin-bottom: 8px;
+      font-size: 1.05rem;
+    }
+    .capability-desc {
+      font-size: .9rem;
+      color: var(--text-mid);
+      line-height: 1.62;
+      margin-bottom: 20px;
+      flex: 1;
+    }
+    .capability-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: .85rem;
+      font-weight: 600;
+      color: var(--blue);
+      transition: gap .15s, color .15s;
+    }
+    .capability-link:hover {
+      gap: 10px;
+      color: var(--blue-hover);
+    }
+    .capability-link svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────────── */
+    .site-footer {
+      background: #060f20;
+      padding: 48px 24px 32px;
+      text-align: center;
+      color: rgba(255,255,255,.55);
+    }
+
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    .footer-content {
+      font-size: .88rem;
+      margin-bottom: 24px;
+    }
+
+    .footer-badge {
+      display: flex;
+      justify-content: center;
+      margin-top: 16px;
+    }
+    .footer-badge img {
+      width: 80px;
+      height: auto;
+    }
+
+    /* ─── Icons ────────────────────────────────────────────────────────── */
+    .icon {
+      display: inline-block;
+      vertical-align: middle;
+      width: 24px;
+      height: 24px;
+      stroke: #1a6bcc;
+      stroke-width: 1.5;
+      fill: none;
+      flex-shrink: 0;
+    }
+
+    /* ─── Cisco Badge ──────────────────────────────────────────────────── */
+    .cisco-badge-link {
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .cisco-badge-link:hover { opacity: 0.85; }
+
+    /* ─── Page Transition ───────────────────────────────────────────────── */
+    body {
+      animation: pageFadeIn 0.4s ease forwards;
+    }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    /* ─── Scroll Reveal ────────────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .capabilities-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      :root { --section-pad: 72px 20px; }
+      .hero { padding: 72px 20px 56px; }
+      .next-section { padding: 72px 20px; }
+      .capabilities-section { padding: 72px 20px; }
+      .hero-title { font-size: 1.75rem; }
+      .next-title { font-size: 1.5rem; }
+      .next-cta .btn { width: 100%; justify-content: center; }
+    }
+
+    @media (max-width: 480px) {
+      .site-footer { padding: 40px 20px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HEADER
+════════════════════════════════════════════════════════════════ -->
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="header-logo" aria-label="Solution Track Consulting home">
+      <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+    </a>
+  </div>
+</header>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     HERO
+════════════════════════════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <span class="hero-label">Solution Track Consulting</span>
+    <h1 class="hero-title">Great connecting with you.</h1>
+    <p class="hero-body">
+      I have spent 25 years working inside complex Cisco UC environments. If something came up in our conversation that is worth a closer look, the best next step is a short call.
+    </p>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NEXT STEP
+════════════════════════════════════════════════════════════════ -->
+<section class="next-section" id="next-step">
+  <div class="next-inner">
+    <span class="next-label reveal">Next Step</span>
+    <h2 class="next-title reveal">Let's put something on the calendar.</h2>
+    <p class="next-body reveal">
+      Whether you are exploring a migration, dealing with an infrastructure issue, or looking to extend your team's capacity, a short call is the fastest way to figure out if we are a fit.
+    </p>
+    <div class="next-cta reveal">
+      <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+         class="btn btn-primary" target="_blank" rel="noopener">
+        Book an Introduction Call with Stephen Frahm
+      </a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     CAPABILITIES
+════════════════════════════════════════════════════════════════ -->
+<section class="capabilities-section" id="capabilities">
+  <div class="container">
+    <div class="section-header">
+      <span class="eyebrow">What We Do</span>
+      <h2 class="section-title">A quick look at the core areas where we help.</h2>
+    </div>
+
+    <div class="capabilities-grid">
+      <!-- E911 Audit -->
+      <div class="capability-card reveal">
+        <div class="capability-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8m-1-13h2v6h-2zm0 8h2v2h-2z"/>
+          </svg>
+        </div>
+        <h3>E911 Strategic Integrity Audit</h3>
+        <p class="capability-desc">
+          Identify and remediate life-safety compliance gaps across Kari's Law and RAY BAUM's Act before they become liability.
+        </p>
+        <a href="e911-integrity.html" class="capability-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+               stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Learn more
+        </a>
+      </div>
+
+      <!-- Forensic Migration -->
+      <div class="capability-card reveal" style="transition-delay:.1s">
+        <div class="capability-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <circle cx="12" cy="12" r="10"/>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"/>
+            <line x1="9" y1="9" x2="9.01" y2="9"/>
+            <line x1="15" y1="9" x2="15.01" y2="9"/>
+          </svg>
+        </div>
+        <h3>Forensic Migration Audit</h3>
+        <p class="capability-desc">
+          Moving from CUCM to Webex, Teams, or Amazon Connect. Find the technical debt before it follows you to the cloud.
+        </p>
+        <a href="migration-audit.html" class="capability-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+               stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Learn more
+        </a>
+      </div>
+
+      <!-- Partner Capacity -->
+      <div class="capability-card reveal" style="transition-delay:.2s">
+        <div class="capability-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <h3>Partner Capacity</h3>
+        <p class="capability-desc">
+          White-label senior UC engineering for IT service providers. Expand your capabilities without adding headcount.
+        </p>
+        <a href="partner-support.html" class="capability-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+               stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          Learn more
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-content">
+      &copy; <span id="footerYear"></span> Solution Track Consulting. All rights reserved.
+      &nbsp;&middot;&nbsp; Veteran-Owned Business
+    </div>
+    <div class="footer-badge">
+      <a href="https://www.cisco.com/c/en/us/partners.html" class="cisco-badge-link" target="_blank" rel="noopener">
+        <img src="assets/Cisco_360Partners_Logo_Partner_fc.png"
+             alt="Cisco 360 Partner" />
+      </a>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JS
+════════════════════════════════════════════════════════════════ -->
+<script>
+  // Footer year
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  // Page fade transition
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
+
+  // Scroll reveal
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealElements.forEach(el => revealObserver.observe(el));
+</script>
+
+</body>
+</html>
