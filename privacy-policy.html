@@ -1,0 +1,689 @@
+<!-- STC Prototype v1 -- privacy-policy.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy | Solution Track Consulting</title>
+  <meta name="description" content="Privacy Policy for Solution Track Consulting. Learn how we collect, use, and protect your personal information." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Reset & Base ─────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy:        #0a1f44;
+      --navy-mid:    #112958;
+      --navy-light:  #1e3a6e;
+      --blue:        #1a6bcc;
+      --blue-hover:  #145db3;
+      --orange:      #e86a2e;
+      --orange-hover:#d05a20;
+      --bg-alt:      #f0f4fa;
+      --bg-white:    #ffffff;
+      --text-dark:   #0d1b2e;
+      --text-mid:    #3a4a60;
+      --text-light:  #6b7a96;
+      --border:      #d8e2f0;
+      --radius:      6px;
+      --radius-lg:   12px;
+      --shadow-sm:   0 2px 8px rgba(10,31,68,.08);
+      --shadow-md:   0 6px 24px rgba(10,31,68,.13);
+      --shadow-lg:   0 16px 48px rgba(10,31,68,.18);
+      --font:        'Inter', system-ui, -apple-system, sans-serif;
+      --max-w:       1140px;
+      --section-pad: 96px 24px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.65;
+      color: var(--text-dark);
+      background: var(--bg-white);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ─── Buttons ───────────────────────────────────────────────────────── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 14px 30px;
+      border-radius: 4px;
+      font-family: var(--font);
+      font-size: .95rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: background .2s, color .2s, border-color .2s, box-shadow .2s, transform .15s;
+      white-space: nowrap;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--blue);
+      color: #fff;
+      border-color: var(--blue);
+      box-shadow: 0 3px 12px rgba(26,107,204,.30);
+    }
+    .btn-primary:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      box-shadow: 0 6px 20px rgba(232,106,46,.40);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      border-color: rgba(255,255,255,.4);
+    }
+    .btn-ghost:hover {
+      background: rgba(255,255,255,.22);
+      border-color: rgba(255,255,255,.7);
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────────────────── */
+    .site-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(10,31,68,.97);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      transition: box-shadow .3s;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      max-width: var(--max-w);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-logo img { height: 40px; width: auto; }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      list-style: none;
+    }
+    .nav-links a {
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: .9rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.82);
+      transition: color .2s, background .2s;
+    }
+    .nav-links a:hover { color: #fff; background: rgba(255,255,255,.08); }
+
+    .nav-cta { margin-left: 8px; }
+    .nav-cta .btn { padding: 9px 20px; font-size: .87rem; }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      background: none;
+      border: none;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: #fff;
+      border-radius: 2px;
+      transition: transform .25s, opacity .25s;
+    }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    .nav-mobile {
+      display: none;
+      flex-direction: column;
+      background: rgba(10,31,68,.99);
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      z-index: 999;
+      padding: 16px 24px 28px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      box-shadow: 0 12px 32px rgba(0,0,0,.4);
+    }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a {
+      padding: 14px 0;
+      color: rgba(255,255,255,.82);
+      font-size: 1rem;
+      font-weight: 500;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      transition: color .15s;
+    }
+    .nav-mobile a:last-of-type { border-bottom: none; }
+    .nav-mobile a:hover { color: #fff; }
+    .nav-mobile .btn {
+      margin-top: 16px;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ─── MAIN CONTENT ──────────────────────────────────────────────────── */
+    main {
+      padding-top: 88px;
+      min-height: 100vh;
+      background: var(--bg-white);
+    }
+
+    .policy-container {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 80px 24px 60px;
+    }
+
+    .policy-headline {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      color: var(--navy);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .policy-updated {
+      font-size: 0.95rem;
+      color: var(--text-light);
+      font-weight: 500;
+      margin-bottom: 40px;
+    }
+
+    .policy-intro {
+      font-size: 1.05rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 56px;
+    }
+
+    .policy-section {
+      margin-bottom: 48px;
+    }
+
+    .policy-section h2 {
+      font-size: 1.3rem;
+      color: var(--navy);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .policy-section p {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 14px;
+    }
+
+    .policy-section p:last-of-type { margin-bottom: 0; }
+
+    .policy-list {
+      margin: 14px 0 14px 24px;
+    }
+
+    .policy-list li {
+      font-size: 0.95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 8px;
+      list-style-type: disc;
+    }
+
+    .policy-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 56px 0;
+    }
+
+    .policy-section a {
+      color: var(--blue);
+      text-decoration: underline;
+      transition: color .15s;
+    }
+    .policy-section a:hover {
+      color: var(--blue-hover);
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────────── */
+    .site-footer {
+      background: #060f20;
+      padding: 64px 24px 32px;
+      color: rgba(255,255,255,.55);
+    }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.07);
+    }
+
+    .footer-brand img {
+      height: 36px; width: auto;
+      filter: brightness(0) invert(1);
+      opacity: .85;
+      margin-bottom: 16px;
+    }
+    .footer-brand p {
+      font-size: .88rem;
+      line-height: 1.65;
+      margin-bottom: 20px;
+    }
+    .footer-badge img {
+      width: 80px;
+      height: auto;
+    }
+
+    .footer-col h4 {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.3);
+      margin-bottom: 16px;
+    }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: .88rem;
+      color: rgba(255,255,255,.5);
+      transition: color .15s;
+    }
+    .footer-col ul li a:hover { color: rgba(255,255,255,.9); }
+
+    .footer-contact p {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: .88rem;
+      margin-bottom: 10px;
+    }
+    .footer-contact svg { width: 15px; height: 15px; flex-shrink: 0; color: rgba(255,255,255,.3); }
+    .footer-contact a { transition: color .15s; }
+    .footer-contact a:hover { color: rgba(255,255,255,.9); }
+
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .footer-bottom p { font-size: .8rem; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a {
+      font-size: .8rem;
+      color: rgba(255,255,255,.3);
+      transition: color .15s;
+    }
+    .footer-bottom-links a:hover { color: rgba(255,255,255,.7); }
+
+    /* ─── Cisco Badge ──────────────────────────────────────────────────── */
+    .cisco-badge-link {
+      display: inline-block;
+      transition: opacity 0.2s ease;
+    }
+    .cisco-badge-link:hover { opacity: 0.85; }
+
+    /* ─── Page Transition ───────────────────────────────────────────────── */
+    body {
+      animation: pageFadeIn 0.4s ease forwards;
+    }
+    @keyframes pageFadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    body.fade-out {
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    /* ─── Responsive ───────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 680px) {
+      .nav-links, .nav-cta { display: none; }
+      .nav-toggle { display: flex; }
+      main { padding-top: 88px; }
+      .policy-container { padding: 64px 20px 48px; }
+      .policy-headline { font-size: 1.75rem; }
+      .policy-section h2 { font-size: 1.1rem; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+
+    @media (max-width: 480px) {
+      .policy-container { padding: 56px 16px 40px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     NAV
+════════════════════════════════════════════════════════════════ -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo" aria-label="Solution Track Consulting home">
+      <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="services.html">Services</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+         class="btn btn-primary" target="_blank" rel="noopener">
+        Talk to Stephen
+      </a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile" id="navMobile" role="dialog" aria-label="Mobile menu">
+  <a href="index.html">Home</a>
+  <a href="services.html">Services</a>
+  <a href="about.html">About</a>
+  <a href="contact.html">Contact</a>
+  <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+     class="btn btn-primary" target="_blank" rel="noopener">
+    Talk to Stephen
+  </a>
+</div>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════════════════════════════ -->
+<main>
+  <div class="policy-container">
+    <h1 class="policy-headline">Privacy Policy</h1>
+    <p class="policy-updated">Last updated: 2026</p>
+
+    <p class="policy-intro">
+      Solution Track Consulting is committed to protecting your privacy. This policy explains what information we collect, how we use it, and your choices regarding that information.
+    </p>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Information We Collect</h2>
+      <p>We collect information in the following ways.</p>
+
+      <p style="margin-top: 20px; font-weight: 600; color: var(--navy);">Information you provide:</p>
+      <ul class="policy-list">
+        <li>Contact form submissions</li>
+        <li>Meeting or call scheduling details</li>
+        <li>Email inquiries</li>
+      </ul>
+
+      <p style="margin-top: 16px; font-weight: 600; color: var(--navy);">Information collected automatically:</p>
+      <ul class="policy-list">
+        <li>Website analytics via Google or equivalent</li>
+        <li>Cookies and tracking technology for site performance and usage data</li>
+      </ul>
+
+      <p>We do not sell or rent your personal information to third parties.</p>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>How We Use Your Information</h2>
+      <p>We use your information to:</p>
+      <ul class="policy-list">
+        <li>Respond to inquiries and provide requested services</li>
+        <li>Schedule calls or consultations</li>
+        <li>Improve our website and service offerings</li>
+        <li>Maintain security and analytics</li>
+      </ul>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Data Sharing</h2>
+      <p>We may share information with:</p>
+      <ul class="policy-list">
+        <li>Service providers who support our website, analytics, or communication systems</li>
+        <li>As required by law or legal process</li>
+      </ul>
+      <p>We do not sell personal information.</p>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Cookies and Tracking</h2>
+      <p>Our website uses cookies to improve functionality and understand how visitors use the site. You may disable cookies in your browser settings.</p>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Data Retention</h2>
+      <p>We retain information only as long as necessary to provide services, fulfill legal obligations, or support business operations.</p>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Your Rights</h2>
+      <p>Depending on your location, you may have the right to:</p>
+      <ul class="policy-list">
+        <li>Access your personal data</li>
+        <li>Request correction or deletion</li>
+        <li>Opt out of communications</li>
+        <li>Request a copy of stored data</li>
+      </ul>
+      <p>To submit a request, contact us at: <a href="mailto:info@solutiontrackconsulting.com">info@solutiontrackconsulting.com</a></p>
+    </section>
+
+    <div class="policy-divider"></div>
+
+    <section class="policy-section">
+      <h2>Contact Us</h2>
+      <p>For questions about this Privacy Policy or how your information is handled:</p>
+      <p style="margin-top: 20px; font-weight: 600; color: var(--navy);">Solution Track Consulting</p>
+      <p><a href="mailto:info@solutiontrackconsulting.com">info@solutiontrackconsulting.com</a></p>
+      <p><a href="tel:5039127788">(503) 912-7788</a></p>
+    </section>
+  </div>
+</main>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FOOTER
+════════════════════════════════════════════════════════════════ -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png"
+             alt="Solution Track Consulting" />
+        <p>
+          Senior-level Cisco UC, Contact Center, and Network Infrastructure engineering
+          for Enterprise IT teams and Service Providers.
+        </p>
+        <div class="footer-badge">
+          <a href="https://www.cisco.com/c/en/us/partners.html" class="cisco-badge-link" target="_blank" rel="noopener">
+            <img src="assets/Cisco_360Partners_Logo_Partner_fc.png"
+                 alt="Cisco 360 Partner" />
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="e911-integrity.html">E911 Integrity Audit</a></li>
+          <li><a href="migration-audit.html">Forensic Migration Audit</a></li>
+          <li><a href="operational-audit.html">Operational Integrity Audit</a></li>
+          <li><a href="partner-support.html">Partner Capacity</a></li>
+          <li><a href="services.html">Systems &amp; Networking</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Portland Metro, Oregon
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.41 2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 5.55 5.55l.92-.92a2 2 0 0 1 2.12-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          <a href="tel:5039127788">503-912-7788</a>
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round"
+               stroke-linejoin="round">
+            <rect width="20" height="16" x="2" y="4" rx="2"/>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+          </svg>
+          <a href="mailto:info@solutiontrackconsulting.com">info@solutiontrackconsulting.com</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear"></span> Solution Track Consulting. All rights reserved.
+         &nbsp;&middot;&nbsp; Veteran-Owned Business</p>
+      <div class="footer-bottom-links">
+        <a href="about.html">About</a>
+        <a href="contact.html">Contact</a>
+        <a href="services.html">Services</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════════════════════════════
+     JS
+════════════════════════════════════════════════════════════════ -->
+<script>
+  // Footer year
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  // Nav shadow on scroll
+  const nav = document.querySelector('.site-nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 20
+      ? '0 4px 24px rgba(0,0,0,.4)'
+      : 'none';
+  }, { passive: true });
+
+  // Mobile nav toggle
+  const toggle    = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('navMobile');
+
+  function openMobileNav() {
+    mobileNav.classList.add('open');
+    toggle.classList.add('open');
+    toggle.setAttribute('aria-expanded', 'true');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeMobileNav() {
+    mobileNav.classList.remove('open');
+    toggle.classList.remove('open');
+    toggle.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    mobileNav.classList.contains('open') ? closeMobileNav() : openMobileNav();
+  });
+
+  mobileNav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', closeMobileNav);
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!nav.contains(e.target) && !mobileNav.contains(e.target)) {
+      closeMobileNav();
+    }
+  });
+
+  // Escape key closes mobile nav
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeMobileNav();
+  });
+
+  // Page fade transition
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.classList.add('fade-out');
+        setTimeout(() => { window.location.href = href; }, 250);
+      });
+    }
+  });
+</script>
+
+</body>
+</html>
