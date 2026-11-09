@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page Not Found | Solution Track Consulting</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── Tokens ──────────────────────────────────────────────────────────── */
+    :root {
+      --blue:           #273C77;
+      --blue-lift:      #4163B1;
+      --orange:         #EF6B51;
+      --link:           #0C5394;
+      --surface:        #FAFBFE;
+      --surface-muted:  #F2F4F8;
+      --border:         #D0D5DD;
+      --text:           #111520;
+      --text-body:      #33475B;
+      --text-mid:       #6B7A8D;
+      --font-head:      'IBM Plex Sans', system-ui, sans-serif;
+      --font-body:      'Inter', system-ui, sans-serif;
+      --max-w:          1100px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--font-body); font-size: 1rem; line-height: 1.7; color: var(--text); background: var(--surface); -webkit-font-smoothing: antialiased; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4 { font-family: var(--font-head); font-weight: 700; line-height: 1.2; text-wrap: balance; }
+    :focus-visible { outline: 2px solid var(--blue); outline-offset: 3px; border-radius: 2px; }
+
+    /* ─── Buttons ─────────────────────────────────────────────────────────── */
+    .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 3px; font-family: var(--font-head); font-size: 0.875rem; font-weight: 700; letter-spacing: 0.01em; cursor: pointer; border: 1px solid transparent; transition: background-color 0.18s ease, color 0.18s ease, border-color 0.18s ease; white-space: nowrap; text-decoration: none; }
+    .btn-primary { background: var(--blue); color: #F8FBFF; border-color: var(--blue); }
+    .btn-primary:hover { background: var(--blue-lift); border-color: var(--blue-lift); }
+    .btn-outline { background: transparent; color: var(--blue); border-color: var(--border); }
+    .btn-outline:hover { background: var(--surface-muted); border-color: var(--blue); }
+
+    /* ─── NAV ─────────────────────────────────────────────────────────────── */
+    .site-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 64px; background: var(--surface); border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; width: 100%; max-width: var(--max-w); margin: 0 auto; padding: 0 24px; }
+    .nav-logo img { height: 36px; width: auto; }
+    .nav-links { display: flex; align-items: center; list-style: none; }
+    .nav-links a { padding: 8px 14px; font-family: var(--font-head); font-size: 0.9375rem; font-weight: 600; color: var(--blue); transition: color 0.15s; }
+    .nav-links a:hover { color: var(--blue-lift); }
+    .nav-links a.active { text-decoration: underline; text-underline-offset: 4px; }
+    .nav-cta { margin-left: 16px; }
+    .nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 6px; background: none; border: none; }
+    .nav-toggle span { display: block; width: 22px; height: 2px; background: var(--blue); transition: transform 0.22s ease-out, opacity 0.18s; }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-mobile { display: none; flex-direction: column; position: fixed; top: 64px; left: 0; right: 0; z-index: 999; background: var(--surface); border-bottom: 1px solid var(--border); padding: 12px 24px 24px; }
+    .nav-mobile.open { display: flex; }
+    .nav-mobile a { padding: 14px 0; font-family: var(--font-head); font-size: 1rem; font-weight: 600; color: var(--blue); border-bottom: 1px solid var(--border); }
+    .nav-mobile a:last-of-type:not(.btn) { border-bottom: none; }
+    .nav-mobile .btn { margin-top: 16px; justify-content: center; }
+
+    /* ─── BREADCRUMB ──────────────────────────────────────────────────────── */
+    .page-breadcrumb { margin-top: 64px; background: var(--surface); border-bottom: 1px solid var(--border); padding: 10px 24px; }
+    .breadcrumb-inner { max-width: var(--max-w); margin: 0 auto; display: flex; align-items: center; gap: 6px; font-size: 0.8125rem; color: var(--text-mid); }
+    .breadcrumb-inner a { color: var(--link); transition: color 0.15s; }
+    .breadcrumb-inner a:hover { color: var(--blue); }
+
+    /* ─── PAGE HEADER ─────────────────────────────────────────────────────── */
+    .page-header { background: var(--surface); padding: 80px 24px 72px; border-bottom: 1px solid var(--border); }
+    .page-header-inner { max-width: var(--max-w); margin: 0 auto; }
+    .page-kicker { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; display: block; margin-bottom: 16px; }
+    .page-header h1 { font-size: clamp(2rem, 4vw, 3rem); color: var(--text); letter-spacing: -0.02em; margin-bottom: 18px; max-width: 24ch; }
+    .page-header-sub { font-size: 1.125rem; color: var(--text-body); line-height: 1.7; max-width: 56ch; }
+    .page-header-actions { margin-top: 32px; display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* ─── QUOTE ───────────────────────────────────────────────────────────── */
+    .quote-section { background: var(--surface-muted); border-bottom: 1px solid var(--border); }
+    .quote-inner { max-width: 680px; margin: 0 auto; padding: 72px 24px; text-align: center; }
+    blockquote { font-family: var(--font-head); font-size: clamp(1.0625rem, 1.8vw, 1.3125rem); color: var(--text); line-height: 1.65; font-style: italic; margin-bottom: 20px; }
+    .quote-attr { font-family: var(--font-head); font-size: 0.875rem; font-weight: 600; color: var(--text-mid); }
+    .quote-attr strong { color: var(--blue); font-style: normal; font-weight: 700; }
+
+    /* ─── SECTION COMMON ──────────────────────────────────────────────────── */
+    .section-kicker { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; display: block; margin-bottom: 12px; }
+    .section-head { margin-bottom: 52px; }
+    .section-head h2 { font-size: clamp(1.5rem, 2.5vw, 2rem); color: var(--text); margin-bottom: 12px; }
+    .section-head p { font-size: 1rem; color: var(--text-body); max-width: 54ch; line-height: 1.7; }
+
+    /* ─── AUDIT ROW LIST ──────────────────────────────────────────────────── */
+    .audit-section { background: var(--surface); border-bottom: 1px solid var(--border); }
+    .audit-inner { max-width: var(--max-w); margin: 0 auto; padding: 96px 24px; }
+    .audit-list { border-top: 1px solid var(--border); }
+    .audit-item { display: grid; grid-template-columns: 4ch 1fr 1fr; gap: 48px; padding: 40px 0; border-bottom: 1px solid var(--border); align-items: start; }
+    .audit-num { font-family: var(--font-head); font-size: 0.75rem; font-weight: 700; color: var(--blue); letter-spacing: 0.08em; padding-top: 3px; }
+    .audit-item-head h3 { font-size: 1.0625rem; color: var(--text); margin-bottom: 10px; }
+    .audit-item-head p { font-size: 0.9375rem; color: var(--text-body); line-height: 1.65; }
+    .audit-bullets { list-style: none; display: flex; flex-direction: column; gap: 8px; margin-top: 2px; }
+    .audit-bullets li { font-size: 0.875rem; color: var(--text-mid); padding-left: 14px; position: relative; line-height: 1.55; }
+    .audit-bullets li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 4px; height: 4px; border-radius: 50%; background: var(--orange); }
+
+    /* ─── DELIVERABLES ────────────────────────────────────────────────────── */
+    .deliverables-section { background: var(--surface-muted); border-bottom: 1px solid var(--border); }
+    .deliverables-inner { max-width: var(--max-w); margin: 0 auto; padding: 96px 24px; }
+    .deliverable-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 48px; }
+    .deliverable-block { background: var(--surface); border: 1px solid var(--border); padding: 36px 32px; }
+    .deliverable-block h3 { font-size: 1.125rem; color: var(--text); margin-bottom: 6px; }
+    .deliverable-sub { font-size: 0.875rem; color: var(--text-mid); font-style: italic; line-height: 1.55; margin-bottom: 24px; padding-bottom: 20px; border-bottom: 1px solid var(--border); }
+    .deliverable-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+    .deliverable-list li { font-size: 0.9375rem; color: var(--text-body); line-height: 1.6; padding-left: 20px; position: relative; }
+    .deliverable-list li::before { content: ''; position: absolute; left: 0; top: 0.6em; width: 5px; height: 5px; border-radius: 50%; background: var(--blue); }
+    .deliverable-block:last-child .deliverable-list li::before { background: var(--orange); }
+    .deliverables-cta { text-align: center; margin-top: 56px; }
+
+    /* ─── CTA BAND ────────────────────────────────────────────────────────── */
+    .cta-band { background: var(--blue); padding: 96px 24px; text-align: center; }
+    .cta-band h2 { font-family: var(--font-head); font-size: clamp(1.375rem, 2.5vw, 1.875rem); color: #EEF2FF; margin-bottom: 16px; max-width: 50ch; margin-left: auto; margin-right: auto; }
+    .cta-band p { font-family: var(--font-body); font-size: 1rem; color: #8AAAD4; line-height: 1.7; max-width: 44ch; margin: 0 auto 40px; }
+    .cta-band .btn-primary { background: #F8FBFF; color: var(--blue); border-color: #F8FBFF; }
+    .cta-band .btn-primary:hover { background: #E8EFF8; border-color: #E8EFF8; }
+
+    /* ─── FOOTER ──────────────────────────────────────────────────────────── */
+    .site-footer { background: #0E1525; padding: 64px 24px 32px; color: #5A6A80; }
+    .footer-inner { max-width: var(--max-w); margin: 0 auto; }
+    .footer-top { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; border-bottom: 1px solid #1E2A40; }
+    .footer-brand img { height: 32px; width: auto; filter: brightness(0) invert(1); opacity: 0.80; margin-bottom: 16px; }
+    .footer-brand p { font-size: 0.875rem; line-height: 1.65; margin-bottom: 20px; max-width: 38ch; }
+    .footer-badge img { width: 72px; height: auto; opacity: 0.65; }
+    .footer-col h4 { font-family: var(--font-head); font-size: 0.6875rem; font-weight: 700; color: #2E3D52; letter-spacing: 0.1em; margin-bottom: 16px; }
+    .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a { font-size: 0.875rem; color: #4A5D74; transition: color 0.15s; }
+    .footer-col ul li a:hover { color: #9AAEC0; }
+    .footer-contact p { display: flex; align-items: center; gap: 10px; font-size: 0.875rem; margin-bottom: 10px; }
+    .footer-contact svg { width: 14px; height: 14px; flex-shrink: 0; color: #2E3D52; }
+    .footer-contact a { color: #4A5D74; transition: color 0.15s; }
+    .footer-contact a:hover { color: #9AAEC0; }
+    .footer-bottom { padding-top: 28px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .footer-bottom p { font-size: 0.8rem; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: 0.8rem; color: #2E3D52; transition: color 0.15s; }
+    .footer-bottom-links a:hover { color: #6A7E94; }
+
+    /* ─── Motion ──────────────────────────────────────────────────────────── */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease-out, transform 0.5s ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    body { animation: pageFadeIn 0.35s ease-out both; }
+    @keyframes pageFadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+    body.fade-out { opacity: 0; transform: translateY(6px); transition: opacity 0.22s ease, transform 0.22s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; }
+      .reveal { opacity: 1; transform: none; }
+      body { animation: none; }
+    }
+
+    /* ─── Responsive ──────────────────────────────────────────────────────── */
+    @media (max-width: 768px) { .nav-links, .nav-cta { display: none; } .nav-toggle { display: flex; } }
+    @media (max-width: 860px) {
+      .audit-item { grid-template-columns: 4ch 1fr; }
+      .audit-bullets { grid-column: 2; }
+      .deliverable-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 600px) {
+      .page-header { padding: 64px 20px 56px; }
+      .audit-inner, .deliverables-inner { padding-left: 20px; padding-right: 20px; }
+      .audit-item { grid-template-columns: 1fr; gap: 10px; }
+      .audit-num { padding-top: 0; }
+      .audit-bullets { grid-column: 1; }
+      .page-header-actions { flex-direction: column; }
+      .footer-top { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-0S3B57YQPV"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-0S3B57YQPV');
+  </script>
+</head>
+<body>
+
+<!-- ── NAV ──────────────────────────────────────────────────────────────── -->
+<nav class="site-nav" role="navigation" aria-label="Main navigation">
+  <div class="nav-inner">
+    <a href="/index.html" class="nav-logo" aria-label="Solution Track Consulting home">
+      <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+    </a>
+    <ul class="nav-links" role="list">
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/services.html">Services</a></li>
+      <li><a href="/about.html">About</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+         class="btn btn-primary" target="_blank" rel="noopener">Talk to Stephen</a>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle mobile menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<nav class="nav-mobile" id="navMobile" aria-label="Mobile navigation">
+  <a href="/index.html">Home</a>
+  <a href="/services.html">Services</a>
+  <a href="/about.html">About</a>
+  <a href="/contact.html">Contact</a>
+  <a href="https://outlook.office.com/book/SolutionTrackConsulting1@NETORGFT8412481.onmicrosoft.com/s/bZnD75cqX0WYLCDX9ZqSZA2"
+     class="btn btn-primary" target="_blank" rel="noopener">Talk to Stephen</a>
+</nav>
+
+
+
+<!-- ── PAGE HEADER ───────────────────────────────────────────────────────── -->
+<header class="page-header">
+  <div class="page-header-inner">
+    <span class="page-kicker">Error 404</span>
+    <h1>Page not found</h1>
+    <p class="page-header-sub">That page doesn&rsquo;t exist or has moved. Try the services overview, or get in touch directly.</p>
+    <div class="page-header-actions">
+      <a href="/services.html" class="btn btn-primary">View services</a>
+      <a href="/index.html" class="btn btn-outline">Back to home</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ── FOOTER ─────────────────────────────────────────────────────────────── -->
+<footer class="site-footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <img src="https://www.solutiontrackconsulting.com/img/STC-logo-blue2-1.png" alt="Solution Track Consulting" />
+        <p>Senior-level Cisco UC, Contact Center, and Network Infrastructure engineering for Enterprise IT teams and Service Providers.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="/e911-integrity.html">E911 Audit</a></li>
+          <li><a href="/migration-audit.html">Migration Audit</a></li>
+          <li><a href="/operational-audit.html">Operational Audit</a></li>
+          <li><a href="/partner-support.html">Partner Capacity</a></li>
+          <li><a href="/services.html">Systems &amp; Networking</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="/about.html">About</a></li>
+          <li><a href="/services.html">Services</a></li>
+          <li><a href="/contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col footer-contact">
+        <h4>Contact</h4>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+          Portland Metro, Oregon
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.6 3.41 2 2 0 0 1 3.56 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.46a16 16 0 0 0 5.55 5.55l.92-.92a2 2 0 0 1 2.12-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:5039127788">503-912-7788</a>
+        </p>
+        <p>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          <a href="mailto:info@solutiontrackconsulting.com">info@solutiontrackconsulting.com</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="footerYear"></span> Solution Track Consulting. All rights reserved. &nbsp;&middot;&nbsp; Veteran-Owned Business</p>
+      <div class="footer-bottom-links">
+        <a href="/about.html">About</a>
+        <a href="/contact.html">Contact</a>
+        <a href="/privacy-policy.html">Privacy</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+<script>
+  document.getElementById('footerYear').textContent = new Date().getFullYear();
+
+  const toggle    = document.getElementById('navToggle');
+  const mobileNav = document.getElementById('navMobile');
+  function openNav() { mobileNav.classList.add('open'); toggle.classList.add('open'); toggle.setAttribute('aria-expanded','true'); document.body.style.overflow='hidden'; }
+  function closeNav() { mobileNav.classList.remove('open'); toggle.classList.remove('open'); toggle.setAttribute('aria-expanded','false'); document.body.style.overflow=''; }
+  toggle.addEventListener('click', e => { e.stopPropagation(); mobileNav.classList.contains('open') ? closeNav() : openNav(); });
+  mobileNav.querySelectorAll('a').forEach(a => a.addEventListener('click', closeNav));
+  document.addEventListener('click', e => { if (!document.querySelector('.site-nav').contains(e.target) && !mobileNav.contains(e.target)) closeNav(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeNav(); });
+
+  document.querySelectorAll('a[href]').forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
+      link.addEventListener('click', function(e) { e.preventDefault(); document.body.classList.add('fade-out'); setTimeout(() => { window.location.href = href; }, 220); });
+    }
+  });
+
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('visible'); revealObs.unobserve(entry.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+</script>
+
+</body>
+</html>

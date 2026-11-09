@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /meet.html
+
+Sitemap: https://www.solutiontrackconsulting.com/sitemap.xml
