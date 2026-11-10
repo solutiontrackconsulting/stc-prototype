@@ -226,20 +226,19 @@
     }
 
     /* ─── Page Transition ───────────────────────────────────────────────── */
-    body { animation: pageFadeIn 0.4s ease forwards; }
+    body { animation: pageFadeIn 0.4s ease; }
     @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
     body.fade-out {
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.25s ease;
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       body { animation: none; }
-      body.fade-out { opacity: 1; transform: none; transition: none; }
+      body.fade-out { opacity: 1; transition: none; }
       .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
     }
     /* ─── Scroll Reveal ─────────────────────────────────────────────────── */
@@ -328,7 +327,7 @@
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:16px;height:16px"><path d="M8 2v4M16 2v4M3 10h18M5 4h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"/></svg>
         Schedule Your 15-Min Strategic Review
       </a>
-      <a href="services.html" class="btn btn-ghost">View All Services</a>
+      <a href="e911-check.html" class="btn btn-ghost">Check Your E911 Risk in 2 Minutes</a>
     </div>
   </div>
 </section>

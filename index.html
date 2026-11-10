@@ -974,20 +974,19 @@
     }
 
     /* ─── Page Transition ───────────────────────────────────────────────── */
-    body { animation: pageFadeIn 0.4s ease forwards; }
+    body { animation: pageFadeIn 0.4s ease; }
     @keyframes pageFadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; }
+      to   { opacity: 1; }
     }
     body.fade-out {
       opacity: 0;
-      transform: translateY(8px);
-      transition: opacity 0.25s ease, transform 0.25s ease;
+      transition: opacity 0.25s ease;
     }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       body { animation: none; }
-      body.fade-out { opacity: 1; transform: none; transition: none; }
+      body.fade-out { opacity: 1; transition: none; }
       .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
     }
     /* ─── Scroll Reveal ─────────────────────────────────────────────────── */
@@ -1263,6 +1262,12 @@
                  stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
                  stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
             E911 Strategic Integrity Audit
+          </a>
+          <a href="e911-check.html" class="service-link">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2.5" stroke-linecap="round"
+                 stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            E911 Risk Assessment (2 minutes)
           </a>
           <a href="migration-audit.html" class="service-link">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
