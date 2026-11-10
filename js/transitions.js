@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (isInternal) {
       link.addEventListener('click', function (e) {
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
         e.preventDefault();
         document.body.classList.add('is-exiting');
         setTimeout(function () {

@@ -361,6 +361,12 @@
       transform: translateY(8px);
       transition: opacity 0.25s ease, transform 0.25s ease;
     }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      body { animation: none; }
+      body.fade-out { opacity: 1; transform: none; transition: none; }
+      .reveal, .fade-up { opacity: 1; transform: none; transition: none; }
+    }
 
     /* ─── Scroll Reveal ────────────────────────────────────────────────── */
     .reveal {
@@ -392,6 +398,7 @@
       .site-footer { padding: 40px 20px 28px; }
     }
   </style>
+  <noscript><style>.reveal, .fade-up { opacity: 1; transform: none; }</style></noscript>
 </head>
 <body>
 
@@ -549,12 +556,19 @@
     const href = link.getAttribute('href');
     if (href && !href.startsWith('http') && !href.startsWith('mailto') && !href.startsWith('tel') && !href.startsWith('#')) {
       link.addEventListener('click', function(e) {
+        // Leave new-tab / modified clicks and reduced-motion users to the browser
+        if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        if (link.target === '_blank' || link.hasAttribute('download')) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
         e.preventDefault();
         document.body.classList.add('fade-out');
         setTimeout(() => { window.location.href = href; }, 250);
       });
     }
   });
+
+  // Restore the page if it is brought back from the back/forward cache mid-fade
+  window.addEventListener('pageshow', function() { document.body.classList.remove('fade-out'); });
 
   // Scroll reveal
   const revealElements = document.querySelectorAll('.reveal');
